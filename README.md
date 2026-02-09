@@ -7,6 +7,7 @@
 | Skill | Description |
 | ----- | ----------- |
 | [authenticate-wallet](./skills/authenticate-wallet/SKILL.md) | Email OTP authentication flow for wallet sign-in |
+| [fund](./skills/fund/SKILL.md) | Add money to wallet via Coinbase Onramp |
 | [send-usdc](./skills/send-usdc/SKILL.md) | Transfer USDC to Ethereum addresses or ENS names |
 | [trade](./skills/trade/SKILL.md) | Swap tokens on Base network (USDC, ETH, WETH) |
 
