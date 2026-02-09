@@ -7,7 +7,7 @@ disable-model-invocation: false
 
 # Funding the Wallet
 
-Use the wallet companion app to fund the wallet with USDC via Coinbase Onramp. This supports multiple payment methods including Apple Pay, credit/debit cards, bank transfers, and Coinbase account.
+Use the wallet companion app to fund the wallet with USDC via Coinbase Onramp. This supports multiple payment methods including Apple Pay, debit cards, bank transfers, and funding from a Coinbase account.
 
 ## Opening the Funding Interface
 
@@ -26,7 +26,7 @@ This opens the wallet companion window where users can:
 | ------ | ----------- |
 | Apple Pay | Fast checkout with Apple Pay (where available) |
 | Coinbase | Transfer from existing Coinbase account |
-| Card | Credit or debit card payment |
+| Card | Debit card payment |
 | Bank | ACH bank transfer |
 
 ## Prerequisites
@@ -54,3 +54,4 @@ awal balance
 - Funding goes through Coinbase's regulated onramp
 - Processing time varies by payment method (instant for card/Apple Pay, 1-3 days for bank)
 - Funds are deposited as USDC on Base network
+- If funding is not available, users can also send USDC on Base directly to the wallet address
