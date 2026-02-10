@@ -1,13 +1,21 @@
 ---
 name: trade
-description: Swap/trade tokens on Base network (e.g., USDC to ETH). Use when the user wants to trade, swap, or exchange tokens.
+description: Swap or trade tokens on Base network. Use when the user wants to trade, swap, exchange, buy, sell, or convert between tokens like USDC, ETH, and WETH. Covers phrases like "buy ETH", "sell ETH for USDC", "convert USDC to ETH", "get some ETH".
 user-invocable: true
 disable-model-invocation: false
 ---
 
 # Trading Tokens
 
-Use the `npx awal@latest trade` command to swap tokens on Base network via the CDP Swap API. You must be authenticated to trade. Check if you're authenticated with `npx awal@latest status`, and see `authenticate-wallet` skill if you are not authenticated.
+Use the `npx awal@latest trade` command to swap tokens on Base network via the CDP Swap API. You must be authenticated to trade.
+
+## Confirm wallet is initialized and authed
+
+```bash
+npx awal@latest status
+```
+
+If the wallet is not authenticated, refer to the `authenticate-wallet` skill.
 
 ## Command Syntax
 

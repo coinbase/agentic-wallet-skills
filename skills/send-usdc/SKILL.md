@@ -1,6 +1,6 @@
 ---
 name: send-usdc
-description: Send USDC to an Ethereum address or ENS name. Use when the user wants to transfer USDC to someone.
+description: Send USDC to an Ethereum address or ENS name. Use when the user wants to send money, pay someone, transfer USDC, tip, donate, or send funds to a wallet address or .eth name. Covers phrases like "send $5 to", "pay 0x...", or "transfer to vitalik.eth".
 user-invocable: true
 disable-model-invocation: false
 ---
@@ -8,6 +8,14 @@ disable-model-invocation: false
 # Sending USDC
 
 Use the `npx awal@latest send` command to transfer USDC from the wallet to any Ethereum address or ENS name on Base.
+
+## Confirm wallet is initialized and authed
+
+```bash
+npx awal@latest status
+```
+
+If the wallet is not authenticated, refer to the `authenticate-wallet` skill.
 
 ## Command Syntax
 
