@@ -3,7 +3,7 @@ name: pay-for-service
 description: Make a paid API request to an x402 endpoint with automatic USDC payment. Use when you or the user want to call a paid API, make an x402 request, use a paid service, or pay for an API call. Use after finding a service with search-for-service.
 user-invocable: true
 disable-model-invocation: false
-allowed-tools: ["Bash(npx awal*)"]
+allowed-tools: ["Bash(npx awal@latest status*)", "Bash(npx awal@latest balance*)", "Bash(npx awal@latest x402 pay *)"]
 ---
 
 # Making Paid x402 Requests

@@ -3,7 +3,7 @@ name: send-usdc
 description: Send USDC to an Ethereum address or ENS name. Use when you or the user want to send money, pay someone, transfer USDC, tip, donate, or send funds to a wallet address or .eth name. Covers phrases like "send $5 to", "pay 0x...", or "transfer to vitalik.eth".
 user-invocable: true
 disable-model-invocation: false
-allowed-tools: ["Bash(npx awal*)"]
+allowed-tools: ["Bash(npx awal@latest status*)", "Bash(npx awal@latest send *)", "Bash(npx awal@latest balance*)"]
 ---
 
 # Sending USDC
