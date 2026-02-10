@@ -6,12 +6,13 @@
 
 | Skill | Description |
 | ----- | ----------- |
-| [authenticate-wallet](./skills/authenticate-wallet/SKILL.md) | Email OTP authentication flow for wallet sign-in |
-| [fund](./skills/fund/SKILL.md) | Add money to wallet via Coinbase Onramp |
-| [send-usdc](./skills/send-usdc/SKILL.md) | Transfer USDC to Ethereum addresses or ENS names |
-| [trade](./skills/trade/SKILL.md) | Swap tokens on Base network (USDC, ETH, WETH) |
-| [search-for-service](./skills/search-for-service/SKILL.md) | Search for a service on the x402 bazaar |
-| [pay-for-service](./skills/pay-for-service/SKILL.md) | Pay for a service on the x402 bazaar |
+| [authenticate-wallet](./skills/authenticate-wallet/SKILL.md) | Sign in to the wallet via email OTP |
+| [fund](./skills/fund/SKILL.md) | Add money to the wallet via Coinbase Onramp |
+| [send-usdc](./skills/send-usdc/SKILL.md) | Send USDC to Ethereum addresses or ENS names |
+| [trade](./skills/trade/SKILL.md) | Swap/trade tokens on Base (USDC, ETH, WETH) |
+| [search-for-service](./skills/search-for-service/SKILL.md) | Search the x402 bazaar for paid API services |
+| [pay-for-service](./skills/pay-for-service/SKILL.md) | Make paid API requests via x402 |
+| [monetize-service](./skills/monetize-service/SKILL.md) | Build and deploy a paid API that other agents can use via x402 |
 
 ## Installation
 
