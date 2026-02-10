@@ -7,32 +7,32 @@ disable-model-invocation: false
 
 # Trading Tokens
 
-Use the `awal trade` command to swap tokens on Base network via the CDP Swap API.
+Use the `npx awal@latest trade` command to swap tokens on Base network via the CDP Swap API. You must be authenticated to trade. Check if you're authenticated with `npx awal@latest status`, and see `authenticate-wallet` skill if you are not authenticated.
 
 ## Command Syntax
 
 ```bash
-awal trade <amount> <from> <to> [options]
+npx awal@latest trade <amount> <from> <to> [options]
 ```
 
 ## Arguments
 
-| Argument | Description                                                    |
-| -------- | -------------------------------------------------------------- |
-| `amount` | Amount to swap (see Amount Formats below)                      |
-| `from`   | Source token: alias (usdc, eth, weth) or contract address (0x...) |
+| Argument | Description                                                            |
+| -------- | ---------------------------------------------------------------------- |
+| `amount` | Amount to swap (see Amount Formats below)                              |
+| `from`   | Source token: alias (usdc, eth, weth) or contract address (0x...)      |
 | `to`     | Destination token: alias (usdc, eth, weth) or contract address (0x...) |
 
 ## Amount Formats
 
 The amount can be specified in multiple formats:
 
-| Format | Example | Description |
-| ------ | ------- | ----------- |
-| Dollar prefix | `$1.00`, `$0.50` | USD notation (decimals based on token) |
-| Decimal | `1.0`, `0.50`, `0.001` | Human-readable with decimal point |
-| Whole number | `5`, `100` | Interpreted as whole tokens |
-| Atomic units | `500000` | Large integers treated as atomic units |
+| Format        | Example                | Description                            |
+| ------------- | ---------------------- | -------------------------------------- |
+| Dollar prefix | `$1.00`, `$0.50`       | USD notation (decimals based on token) |
+| Decimal       | `1.0`, `0.50`, `0.001` | Human-readable with decimal point      |
+| Whole number  | `5`, `100`             | Interpreted as whole tokens            |
+| Atomic units  | `500000`               | Large integers treated as atomic units |
 
 **Auto-detection**: Large integers without a decimal point are treated as atomic units. For example, `500000` for USDC (6 decimals) = $0.50.
 
@@ -40,19 +40,19 @@ The amount can be specified in multiple formats:
 
 ## Options
 
-| Option               | Description                                           |
-| -------------------- | ----------------------------------------------------- |
-| `-c, --chain <name>` | Blockchain network (default: base)                    |
-| `-s, --slippage <n>` | Slippage tolerance in basis points (100 = 1%)         |
-| `--json`             | Output result as JSON                                 |
+| Option               | Description                                   |
+| -------------------- | --------------------------------------------- |
+| `-c, --chain <name>` | Blockchain network (default: base)            |
+| `-s, --slippage <n>` | Slippage tolerance in basis points (100 = 1%) |
+| `--json`             | Output result as JSON                         |
 
 ## Token Aliases
 
-| Alias | Token  | Decimals | Address                                    |
-| ----- | ------ | -------- | ------------------------------------------ |
-| usdc  | USDC   | 6        | 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913 |
-| eth   | ETH    | 18       | 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE |
-| weth  | WETH   | 18       | 0x4200000000000000000000000000000000000006 |
+| Alias | Token | Decimals | Address                                    |
+| ----- | ----- | -------- | ------------------------------------------ |
+| usdc  | USDC  | 6        | 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913 |
+| eth   | ETH   | 18       | 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE |
+| weth  | WETH  | 18       | 0x4200000000000000000000000000000000000006 |
 
 ## Examples
 
@@ -87,6 +87,7 @@ awal trade $1 usdc eth --json
 ## Error Handling
 
 Common errors:
+
 - "Not authenticated" - Run `awal auth login <email>` first
 - "Invalid token" - Use a valid alias (usdc, eth, weth) or 0x address
 - "Cannot swap a token to itself" - From and to must be different

@@ -1,6 +1,6 @@
 ---
 name: fund
-description: Fund the wallet with USDC via Coinbase Onramp. Use when the user wants to add money, buy USDC, deposit funds, or top up their wallet.
+description: Fund the wallet with USDC via Coinbase Onramp. Use when you are out of funds and want to add money, buy USDC, deposit funds, or top up the wallet.
 user-invocable: true
 disable-model-invocation: false
 ---
@@ -9,34 +9,43 @@ disable-model-invocation: false
 
 Use the wallet companion app to fund the wallet with USDC via Coinbase Onramp. This supports multiple payment methods including Apple Pay, debit cards, bank transfers, and funding from a Coinbase account.
 
+## Confirm wallet is initialized and authed
+
+```bash
+npx awal@latest status
+```
+
+If the wallet is not authenticated, refer to the `authenticate-wallet` skill.
+
 ## Opening the Funding Interface
 
 ```bash
-awal show
+npx awal@latest show
 ```
 
 This opens the wallet companion window where users can:
+
 1. Select a preset amount ($10, $20, $50) or enter a custom amount
 2. Choose their preferred payment method
 3. Complete the purchase through Coinbase Pay
 
 ## Payment Methods
 
-| Method | Description |
-| ------ | ----------- |
+| Method    | Description                                    |
+| --------- | ---------------------------------------------- |
 | Apple Pay | Fast checkout with Apple Pay (where available) |
-| Coinbase | Transfer from existing Coinbase account |
-| Card | Debit card payment |
-| Bank | ACH bank transfer |
+| Coinbase  | Transfer from existing Coinbase account        |
+| Card      | Debit card payment                             |
+| Bank      | ACH bank transfer                              |
 
 ## Prerequisites
 
-- Must be authenticated (`awal status` to check)
+- Must be authenticated (`npx awal@latest status` to check)
 - Coinbase Onramp is available in supported regions (US, etc.)
 
 ## Flow
 
-1. Run `awal show` to open the wallet UI
+1. Run `npx awal@latest show` to open the wallet UI
 2. Instruct the user to click "Buy USDC" or the fund button
 3. User selects amount and payment method in the UI
 4. User completes payment through Coinbase Pay (opens in browser)
@@ -46,7 +55,7 @@ This opens the wallet companion window where users can:
 
 ```bash
 # Check updated balance
-awal balance
+npx awal@latest balance
 ```
 
 ## Notes
