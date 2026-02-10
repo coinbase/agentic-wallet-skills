@@ -3,6 +3,7 @@ name: trade
 description: Swap or trade tokens on Base network. Use when the user wants to trade, swap, exchange, buy, sell, or convert between tokens like USDC, ETH, and WETH. Covers phrases like "buy ETH", "sell ETH for USDC", "convert USDC to ETH", "get some ETH".
 user-invocable: true
 disable-model-invocation: false
+allowed-tools: ["Bash(npx awal*)"]
 ---
 
 # Trading Tokens

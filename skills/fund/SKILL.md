@@ -3,6 +3,7 @@ name: fund
 description: Add money to the wallet. Use when the user wants to fund, deposit, top up, load, buy USDC, add funds, onramp, or get USDC. Also use when the wallet has insufficient balance for a send or trade operation, or when the user asks "how do I get USDC?"
 user-invocable: true
 disable-model-invocation: false
+allowed-tools: ["Bash(npx awal*)"]
 ---
 
 # Funding the Wallet

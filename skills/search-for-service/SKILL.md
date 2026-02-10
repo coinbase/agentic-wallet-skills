@@ -3,6 +3,7 @@ name: search-for-service
 description: Search and browse the x402 bazaar marketplace for paid API services. Use when the user wants to find available services, see what's available, discover APIs, or needs an external service to accomplish a task. Also use as a fallback when no other skill clearly matches — search the bazaar to see if a paid service exists. Covers "what can I do?", "find me an API for...", "what services are available?", "search for...", "browse the bazaar".
 user-invocable: true
 disable-model-invocation: false
+allowed-tools: ["Bash(npx awal*)"]
 ---
 
 # Searching the x402 Bazaar
