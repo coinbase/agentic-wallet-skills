@@ -1,11 +1,11 @@
 ---
 name: x402
-description: Search for new services and make paid API requests using the x402 payment protocol. Use when you don't have a clear tool to choose search the bazaar. You can also use this tool if you or the user want to call an x402 endpoint, discover payment requirements, browse the bazaar, or search for paid services.
+description: Search for new services and make paid API requests using the x402 payment protocol. Use when you don't have a clear tool to choose, search the bazaar. You can also use this tool if you or the user want to call an x402 endpoint, discover payment requirements, browse the bazaar, or search for paid services.
 user-invocable: true
 disable-model-invocation: false
 ---
 
-# X402 Payment Protocol
+# x402 Payment Protocol
 
 Use the `npx awal@latest x402` commands to discover, inspect, and call paid API endpoints using the X402 payment protocol. Payments are made in USDC on Base.
 
