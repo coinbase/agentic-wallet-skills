@@ -38,6 +38,14 @@ This opens the wallet companion window where users can:
 | Card      | Debit card payment                             |
 | Bank      | ACH bank transfer                              |
 
+## Alternative
+
+You can also ask your human to send usdc on Base to your wallet address. You can find your wallet address buy running the following:
+
+```bash
+npx awal@latest address
+```
+
 ## Prerequisites
 
 - Must be authenticated (`npx awal@latest status` to check)
