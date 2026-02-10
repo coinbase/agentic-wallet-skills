@@ -1,4 +1,4 @@
-# Coinbase Agent Wallet Skills
+# Coinbase Agentic Wallet Skills
 
 [Agent Skills](https://agentskills.io) for crypto wallet operations. These skills enable AI agents to authenticate, send USDC, trade tokens and more using the [`awal`](https://www.npmjs.com/package/awal) CLI.
 
@@ -10,13 +10,15 @@
 | [fund](./skills/fund/SKILL.md) | Add money to wallet via Coinbase Onramp |
 | [send-usdc](./skills/send-usdc/SKILL.md) | Transfer USDC to Ethereum addresses or ENS names |
 | [trade](./skills/trade/SKILL.md) | Swap tokens on Base network (USDC, ETH, WETH) |
+| [search-for-service](./skills/search-for-service/SKILL.md) | Search for a service on the x402 bazaar |
+| [pay-for-service](./skills/pay-for-service/SKILL.md) | Pay for a service on the x402 bazaar |
 
 ## Installation
 
 Install with [Vercel's Skills CLI](https:/skills.sh):
 
 ```bash
-npx skills add coinbase/agent-wallet-skills
+npx skills add coinbase/agentic-wallet-skills
 ```
 
 ## Usage
