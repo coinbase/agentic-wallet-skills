@@ -47,6 +47,8 @@ X402 uses USDC atomic units (6 decimals):
 | 50000        | $0.05 |
 | 10000        | $0.01 |
 
+**IMPORTANT**: Always single-quote amounts that use `$` to prevent bash variable expansion (e.g. `'$1.00'` not `$1.00`).
+
 ## Examples
 
 ```bash

@@ -38,7 +38,7 @@ The amount can be specified in multiple formats:
 
 | Format        | Example                | Description                            |
 | ------------- | ---------------------- | -------------------------------------- |
-| Dollar prefix | `$1.00`, `$0.50`       | USD notation (decimals based on token) |
+| Dollar prefix | `'$1.00'`, `'$0.50'`  | USD notation (decimals based on token) |
 | Decimal       | `1.0`, `0.50`, `0.001` | Human-readable with decimal point      |
 | Whole number  | `5`, `100`             | Interpreted as whole tokens            |
 | Atomic units  | `500000`               | Large integers treated as atomic units |
@@ -63,29 +63,31 @@ The amount can be specified in multiple formats:
 | eth   | ETH   | 18       | 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE |
 | weth  | WETH  | 18       | 0x4200000000000000000000000000000000000006 |
 
+**IMPORTANT**: Always single-quote amounts that use `$` to prevent bash variable expansion (e.g. `'$1.00'` not `$1.00`).
+
 ## Examples
 
 ```bash
-# Swap $1 USDC for ETH (dollar prefix)
-awal trade $1 usdc eth
+# Swap $1 USDC for ETH (dollar prefix — note the single quotes)
+npx awal@latest trade '$1' usdc eth
 
 # Swap 0.50 USDC for ETH (decimal format)
-awal trade 0.50 usdc eth
+npx awal@latest trade 0.50 usdc eth
 
 # Swap 500000 atomic units of USDC for ETH
-awal trade 500000 usdc eth
+npx awal@latest trade 500000 usdc eth
 
 # Swap 0.01 ETH for USDC
-awal trade 0.01 eth usdc
+npx awal@latest trade 0.01 eth usdc
 
 # Swap with custom slippage (2%)
-awal trade $5 usdc eth --slippage 200
+npx awal@latest trade '$5' usdc eth --slippage 200
 
 # Swap using contract addresses (decimals read from chain)
-awal trade 100 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913 0x4200000000000000000000000000000000000006
+npx awal@latest trade 100 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913 0x4200000000000000000000000000000000000006
 
 # Get JSON output
-awal trade $1 usdc eth --json
+npx awal@latest trade '$1' usdc eth --json
 ```
 
 ## Prerequisites

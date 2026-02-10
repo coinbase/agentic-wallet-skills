@@ -28,7 +28,7 @@ npx awal@latest send <amount> <recipient> [--chain <chain>] [--json]
 
 | Argument    | Description                                                                                                                                                                                                                          |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `amount`    | Amount to send: "$1.00", "1.00", or atomic units (1000000 = $1). If the number looks like atomic units (no decimal or > 100), treat as atomic units. Assume that people won't be sending more than 100 USDC the majority of the time |
+| `amount`    | Amount to send: '$1.00', '1.00', or atomic units (1000000 = $1). Always single-quote amounts that use `$` to prevent bash variable expansion. If the number looks like atomic units (no decimal or > 100), treat as atomic units. Assume that people won't be sending more than 100 USDC the majority of the time |
 | `recipient` | Ethereum address (0x...) or ENS name (vitalik.eth)                                                                                                                                                                                   |
 
 ## Options
@@ -42,16 +42,16 @@ npx awal@latest send <amount> <recipient> [--chain <chain>] [--json]
 
 ```bash
 # Send $1.00 USDC to an address
-npx awal@latest awal send 1 0x1234...abcd
+npx awal@latest send 1 0x1234...abcd
 
 # Send $0.50 USDC to an ENS name
-npx awal@latest awal send 0.50 vitalik.eth
+npx awal@latest send 0.50 vitalik.eth
 
-# Send with dollar sign prefix
-npx awal@latest awal send "$5.00" 0x1234...abcd
+# Send with dollar sign prefix (note the single quotes)
+npx awal@latest send '$5.00' 0x1234...abcd
 
 # Get JSON output
-npx awal@latest awal send 1 vitalik.eth --json
+npx awal@latest send 1 vitalik.eth --json
 ```
 
 ## ENS Resolution
