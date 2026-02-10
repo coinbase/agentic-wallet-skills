@@ -1,6 +1,6 @@
 ---
 name: monetize-service
-description: Build and deploy a paid API that other agents can pay to use via x402. Use when the user wants to monetize an API, make money, earn money, offer a service, sell a service to other agents, charge for endpoints, create a paid endpoint, or set up a paid service. Covers "make money by offering an endpoint", "sell a service", "monetize your data", "create a paid API".
+description: Build and deploy a paid API that other agents can pay to use via x402. Use when you or the user want to monetize an API, make money, earn money, offer a service, sell a service to other agents, charge for endpoints, create a paid endpoint, or set up a paid service. Covers "make money by offering an endpoint", "sell a service", "monetize your data", "create a paid API".
 user-invocable: true
 disable-model-invocation: false
 allowed-tools: ["Bash(npx awal*)", "Bash(npm *)", "Bash(node *)", "Bash(curl *)", "Bash(mkdir *)"]
