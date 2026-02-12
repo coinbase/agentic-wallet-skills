@@ -134,29 +134,21 @@ Block-level metadata.
 | transaction_count | UInt64 | Number of transactions |
 | action | Int8 | Added (1) or removed (-1) |
 
-### base.transfers
-
-Token transfer events.
-
-| Column | Type | Description |
-| --- | --- | --- |
-| block_number | UInt64 | Block number |
-| block_timestamp | DateTime64 | Block timestamp |
-| transaction_to | String | Transaction recipient |
-| transaction_from | String | Transaction sender |
-| log_index | UInt32 | Log index |
-| token_address | String | Token contract address |
-| from_address | String | Transfer sender |
-| to_address | String | Transfer recipient |
-| value | UInt256 | Transfer amount (raw) |
-| action | Enum8('added' = 1, 'removed' = -1) | Added or removed |
-
 ## Example Queries
 
-### Get recent USDC Transfer events
+### Get recent USDC Transfer events with decoded parameters
 
-```bash
-npx awal@latest x402 pay https://x402.cdp.coinbase.com/platform/v2/data/query/run -X POST -d '{"sql": "SELECT block_number, block_timestamp, transaction_hash, parameters FROM base.events WHERE event_signature = '\''Transfer(address,address,uint256)'\'' AND address = lower('\''0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'\'') AND block_timestamp >= now() - INTERVAL 1 HOUR LIMIT 10"}' --json
+```sql
+SELECT
+  parameters['from'] AS sender,
+  parameters['to'] AS to,
+  parameters['value'] AS amount,
+  address AS token_address
+FROM base.events
+WHERE
+  event_signature = 'Transfer(address,address,uint256)'
+  AND address = '0x833589fcd6edb6e08f4c7c32d4f71b54bda02913'
+LIMIT 10
 ```
 
 ### Get transactions from a specific address
@@ -204,4 +196,5 @@ npx awal@latest x402 pay https://x402.cdp.coinbase.com/platform/v2/data/query/ru
 
 - "Not authenticated" - Run `awal auth login <email>` first, or see `authenticate-wallet` skill
 - "Insufficient balance" - Fund wallet with USDC; see `fund` skill
-- Query timeout or error - Ensure you are filtering on indexed fields and using a LIMIT
+- **4xx or 5xx HTTP errors** - This most likely means your SQL query is malformed, not a wallet or payment issue. Check for syntax errors, invalid column names, missing quotes, or unescaped characters. Fix the query and retry.
+- Query timeout - Ensure you are filtering on indexed fields and using a LIMIT
