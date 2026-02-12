@@ -1,6 +1,6 @@
 ---
 name: query-blockchain-data
-description: Query onchain blockchain data on Base using the CDP SQL API via x402. Use when you or the user want to look up transactions, events, blocks, transfers, or any onchain data on Base. This skill helps construct CoinbaseQL queries and execute them against the CDP SQL API. Costs $0.10 per query.
+description: Query onchain blockchain data on Base using the CDP SQL API via x402. This skill helps construct CoinbaseQL queries against decoded blocks, transactions, and event.
 user-invocable: true
 disable-model-invocation: false
 allowed-tools: ["Bash(npx awal@latest status*)", "Bash(npx awal@latest balance*)", "Bash(npx awal@latest x402 pay *)"]
@@ -8,7 +8,7 @@ allowed-tools: ["Bash(npx awal@latest status*)", "Bash(npx awal@latest balance*)
 
 # Query Blockchain Data on Base
 
-Use the CDP SQL API to query onchain data (events, transactions, blocks, transfers) on Base. Queries are executed via x402 and cost **$0.10 (100000 atomic units) per query**.
+Use the CDP SQL API to query onchain data (events, transactions, blocks, transfers) on Base. Queries are executed via x402 and are charged per query.
 
 ## Confirm wallet is initialized and authed
 
@@ -148,6 +148,7 @@ FROM base.events
 WHERE
   event_signature = 'Transfer(address,address,uint256)'
   AND address = '0x833589fcd6edb6e08f4c7c32d4f71b54bda02913'
+  AND block_timestamp >= now() - INTERVAL 7 DAY
 LIMIT 10
 ```
 
@@ -196,5 +197,4 @@ npx awal@latest x402 pay https://x402.cdp.coinbase.com/platform/v2/data/query/ru
 
 - "Not authenticated" - Run `awal auth login <email>` first, or see `authenticate-wallet` skill
 - "Insufficient balance" - Fund wallet with USDC; see `fund` skill
-- **4xx or 5xx HTTP errors** - This most likely means your SQL query is malformed, not a wallet or payment issue. Check for syntax errors, invalid column names, missing quotes, or unescaped characters. Fix the query and retry.
-- Query timeout - Ensure you are filtering on indexed fields and using a LIMIT
+- Query timeout or error - Ensure you are filtering on indexed fields and using a LIMIT
