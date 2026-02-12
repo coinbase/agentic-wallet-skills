@@ -1,6 +1,6 @@
 ---
 name: query-blockchain-data
-description: Query onchain blockchain data on Base using the CDP SQL API via x402. This skill helps construct CoinbaseQL queries against decoded blocks, transactions, and event.
+description: Query onchain blockchain data on Base using the CDP SQL API via x402. Use when you or your user want to view onchain information about decoded blocks, transactions, and event.
 user-invocable: true
 disable-model-invocation: false
 allowed-tools: ["Bash(npx awal@latest status*)", "Bash(npx awal@latest balance*)", "Bash(npx awal@latest x402 pay *)"]
