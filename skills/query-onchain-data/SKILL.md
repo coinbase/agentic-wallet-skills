@@ -1,12 +1,12 @@
 ---
-name: query-blockchain-data
-description: Query onchain blockchain data on Base using the CDP SQL API via x402. Use when you or your user want to view onchain information about decoded blocks, transactions, and event.
+name: query-onchain-data
+description: Query onchain data on Base using the CDP SQL API via x402. Use when you or your user want to view onchain information about decoded blocks, transactions, and event.
 user-invocable: true
 disable-model-invocation: false
 allowed-tools: ["Bash(npx awal@latest status*)", "Bash(npx awal@latest balance*)", "Bash(npx awal@latest x402 pay *)"]
 ---
 
-# Query Blockchain Data on Base
+# Query Onchain Data on Base
 
 Use the CDP SQL API to query onchain data (events, transactions, blocks, transfers) on Base. Queries are executed via x402 and are charged per query.
 
