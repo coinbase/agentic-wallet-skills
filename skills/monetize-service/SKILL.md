@@ -47,7 +47,6 @@ const express = require("express");
 const { paymentMiddleware } = require("@x402/express");
 const { x402ResourceServer, HTTPFacilitatorClient } = require("@x402/core/server");
 const { ExactEvmScheme } = require("@x402/evm/exact/server");
-const { declareDiscoveryExtension } = require("@x402/extensions/bazaar");
 
 const app = express();
 app.use(express.json());
@@ -72,18 +71,6 @@ app.use(
         },
         description: "Description of what this endpoint returns",
         mimeType: "application/json",
-        extensions: {
-          ...declareDiscoveryExtension({
-            output: {
-              example: { data: "This costs $0.01 per request" },
-              schema: {
-                properties: {
-                  data: { type: "string" },
-                },
-              },
-            },
-          }),
-        },
       },
     },
     server,
