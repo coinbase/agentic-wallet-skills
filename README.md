@@ -13,7 +13,7 @@
 | [search-for-service](./skills/search-for-service/SKILL.md) | Search the x402 bazaar for paid API services |
 | [pay-for-service](./skills/pay-for-service/SKILL.md) | Make paid API requests via x402 |
 | [monetize-service](./skills/monetize-service/SKILL.md) | Build and deploy a paid API that other agents can use via x402 |
-| [query-onchain-data](./skills/query-onchain-data/SKILL.md | Query onchain data on Base using the CDP SQL API via x402 |
+| [query-onchain-data](./skills/query-onchain-data/SKILL.md) | Query onchain data on Base using the CDP SQL API via x402 |
 
 ## Installation
 
