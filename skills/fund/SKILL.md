@@ -3,7 +3,7 @@ name: fund
 description: Add money to the wallet. Use when you or the user want to fund, deposit, top up, load, buy USDC, add funds, onramp, or get USDC. Also use when the wallet has insufficient balance for a send or trade operation, or when someone asks "how do I get USDC?"
 user-invocable: true
 disable-model-invocation: false
-allowed-tools: ["Bash(npx awal@latest status*)", "Bash(npx awal@latest show*)", "Bash(npx awal@latest address*)", "Bash(npx awal@latest balance*)"]
+allowed-tools: ["Bash(npx awal@2.0.3 status*)", "Bash(npx awal@2.0.3 show*)", "Bash(npx awal@2.0.3 address*)", "Bash(npx awal@2.0.3 balance*)"]
 ---
 
 # Funding the Wallet
@@ -13,7 +13,7 @@ Use the wallet companion app to fund the wallet with USDC via Coinbase Onramp. T
 ## Confirm wallet is initialized and authed
 
 ```bash
-npx awal@latest status
+npx awal@2.0.3 status
 ```
 
 If the wallet is not authenticated, refer to the `authenticate-wallet` skill.
@@ -21,7 +21,7 @@ If the wallet is not authenticated, refer to the `authenticate-wallet` skill.
 ## Opening the Funding Interface
 
 ```bash
-npx awal@latest show
+npx awal@2.0.3 show
 ```
 
 This opens the wallet companion window where users can:
@@ -44,17 +44,17 @@ This opens the wallet companion window where users can:
 You can also ask your human to send usdc on Base to your wallet address. You can find your wallet address buy running the following:
 
 ```bash
-npx awal@latest address
+npx awal@2.0.3 address
 ```
 
 ## Prerequisites
 
-- Must be authenticated (`npx awal@latest status` to check)
+- Must be authenticated (`npx awal@2.0.3 status` to check)
 - Coinbase Onramp is available in supported regions (US, etc.)
 
 ## Flow
 
-1. Run `npx awal@latest show` to open the wallet UI
+1. Run `npx awal@2.0.3 show` to open the wallet UI
 2. Instruct the user to click the Fund button
 3. User selects amount and payment method in the UI
 4. User completes payment through Coinbase Pay (opens in browser)
@@ -64,7 +64,7 @@ npx awal@latest address
 
 ```bash
 # Check updated balance
-npx awal@latest balance
+npx awal@2.0.3 balance
 ```
 
 ## Notes

@@ -4,16 +4,16 @@
 
 ## Available Skills
 
-| Skill | Description |
-| ----- | ----------- |
-| [authenticate-wallet](./skills/authenticate-wallet/SKILL.md) | Sign in to the wallet via email OTP |
-| [fund](./skills/fund/SKILL.md) | Add money to the wallet via Coinbase Onramp |
-| [send-usdc](./skills/send-usdc/SKILL.md) | Send USDC to Ethereum addresses or ENS names |
-| [trade](./skills/trade/SKILL.md) | Swap/trade tokens on Base (USDC, ETH, WETH) |
-| [search-for-service](./skills/search-for-service/SKILL.md) | Search the x402 bazaar for paid API services |
-| [pay-for-service](./skills/pay-for-service/SKILL.md) | Make paid API requests via x402 |
-| [monetize-service](./skills/monetize-service/SKILL.md) | Build and deploy a paid API that other agents can use via x402 |
-| [query-onchain-data](./skills/query-onchain-data/SKILL.md) | Query onchain data on Base using the CDP SQL API via x402 |
+| Skill                                                        | Description                                                    |
+| ------------------------------------------------------------ | -------------------------------------------------------------- |
+| [authenticate-wallet](./skills/authenticate-wallet/SKILL.md) | Sign in to the wallet via email OTP                            |
+| [fund](./skills/fund/SKILL.md)                               | Add money to the wallet via Coinbase Onramp                    |
+| [send-usdc](./skills/send-usdc/SKILL.md)                     | Send USDC to Ethereum addresses or ENS names                   |
+| [trade](./skills/trade/SKILL.md)                             | Swap/trade tokens on Base (USDC, ETH, WETH)                    |
+| [search-for-service](./skills/search-for-service/SKILL.md)   | Search the x402 bazaar for paid API services                   |
+| [pay-for-service](./skills/pay-for-service/SKILL.md)         | Make paid API requests via x402                                |
+| [monetize-service](./skills/monetize-service/SKILL.md)       | Build and deploy a paid API that other agents can use via x402 |
+| [query-onchain-data](./skills/query-onchain-data/SKILL.md)   | Query onchain data on Base using the CDP SQL API via x402      |
 
 ## Installation
 
@@ -45,6 +45,17 @@ To add a new skill:
 2. Add a `SKILL.md` file with YAML frontmatter and instructions
 
 See the [Agent Skills specification](https://agentskills.io/specification) for the complete format.
+
+### Updating the `awal` version
+
+All skills pin a specific version of the `awal` CLI. When a new version is published to npm, run:
+
+```bash
+# Make sure you're using Node v22+
+node ./scripts/bump-awal.js
+```
+
+This fetches the latest version from the npm registry and updates all skill files automatically.
 
 ## License
 

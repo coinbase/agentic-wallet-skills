@@ -3,17 +3,17 @@ name: send-usdc
 description: Send USDC to an Ethereum address or ENS name. Use when you or the user want to send money, pay someone, transfer USDC, tip, donate, or send funds to a wallet address or .eth name. Covers phrases like "send $5 to", "pay 0x...", or "transfer to vitalik.eth".
 user-invocable: true
 disable-model-invocation: false
-allowed-tools: ["Bash(npx awal@latest status*)", "Bash(npx awal@latest send *)", "Bash(npx awal@latest balance*)"]
+allowed-tools: ["Bash(npx awal@2.0.3 status*)", "Bash(npx awal@2.0.3 send *)", "Bash(npx awal@2.0.3 balance*)"]
 ---
 
 # Sending USDC
 
-Use the `npx awal@latest send` command to transfer USDC from the wallet to any Ethereum address or ENS name on Base.
+Use the `npx awal@2.0.3 send` command to transfer USDC from the wallet to any Ethereum address or ENS name on Base.
 
 ## Confirm wallet is initialized and authed
 
 ```bash
-npx awal@latest status
+npx awal@2.0.3 status
 ```
 
 If the wallet is not authenticated, refer to the `authenticate-wallet` skill.
@@ -21,7 +21,7 @@ If the wallet is not authenticated, refer to the `authenticate-wallet` skill.
 ## Command Syntax
 
 ```bash
-npx awal@latest send <amount> <recipient> [--chain <chain>] [--json]
+npx awal@2.0.3 send <amount> <recipient> [--chain <chain>] [--json]
 ```
 
 ## Arguments
@@ -42,16 +42,16 @@ npx awal@latest send <amount> <recipient> [--chain <chain>] [--json]
 
 ```bash
 # Send $1.00 USDC to an address
-npx awal@latest send 1 0x1234...abcd
+npx awal@2.0.3 send 1 0x1234...abcd
 
 # Send $0.50 USDC to an ENS name
-npx awal@latest send 0.50 vitalik.eth
+npx awal@2.0.3 send 0.50 vitalik.eth
 
 # Send with dollar sign prefix (note the single quotes)
-npx awal@latest send '$5.00' 0x1234...abcd
+npx awal@2.0.3 send '$5.00' 0x1234...abcd
 
 # Get JSON output
-npx awal@latest send 1 vitalik.eth --json
+npx awal@2.0.3 send 1 vitalik.eth --json
 ```
 
 ## ENS Resolution
@@ -64,7 +64,7 @@ ENS names are automatically resolved to addresses via Ethereum mainnet. The comm
 
 ## Prerequisites
 
-- Must be authenticated (`npx awal@latest awal status` to check, `npx awal@latest awal auth login` to sign in, see skill `authenticate-wallet` for more information)
+- Must be authenticated (`npx awal@2.0.3 awal status` to check, `npx awal@2.0.3 awal auth login` to sign in, see skill `authenticate-wallet` for more information)
 - Wallet must have sufficient USDC balance (`npx awal balance` to check)
 
 ## Error Handling

@@ -7,7 +7,7 @@ disable-model-invocation: false
 
 # x402 Payment Protocol
 
-Use the `npx awal@latest x402` commands to discover, inspect, and call paid API endpoints using the X402 payment protocol. Payments are made in USDC on Base.
+Use the `npx awal@2.0.3 x402` commands to discover, inspect, and call paid API endpoints using the X402 payment protocol. Payments are made in USDC on Base.
 
 ## Workflow
 
@@ -24,7 +24,7 @@ The typical x402 workflow is:
 Find paid services by keyword using BM25 relevance search:
 
 ```bash
-npx awal@latest x402 bazaar search <query> [-k <n>] [--force-refresh] [--json]
+npx awal@2.0.3 x402 bazaar search <query> [-k <n>] [--force-refresh] [--json]
 ```
 
 | Option            | Description                          |
