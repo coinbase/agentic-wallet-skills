@@ -38,6 +38,15 @@ npx awal@2.0.3 send <amount> <recipient> [--chain <chain>] [--json]
 | `--chain <name>` | Blockchain network (default: base) |
 | `--json`         | Output result as JSON              |
 
+## Input Validation
+
+Before constructing the command, validate all user-provided values to prevent shell injection:
+
+- **amount**: Must match `^\$?[\d.]+$` (digits, optional decimal point, optional `$` prefix). Reject if it contains spaces, semicolons, pipes, backticks, or other shell metacharacters.
+- **recipient**: Must be a valid `0x` hex address (`^0x[0-9a-fA-F]{40}$`) or an ENS name (`^[a-zA-Z0-9.-]+\.eth$`). Reject any value containing spaces or shell metacharacters.
+
+Do not pass unvalidated user input into the command.
+
 ## Examples
 
 ```bash

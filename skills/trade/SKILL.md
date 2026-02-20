@@ -65,6 +65,16 @@ The amount can be specified in multiple formats:
 
 **IMPORTANT**: Always single-quote amounts that use `$` to prevent bash variable expansion (e.g. `'$1.00'` not `$1.00`).
 
+## Input Validation
+
+Before constructing the command, validate all user-provided values to prevent shell injection:
+
+- **amount**: Must match `^\$?[\d.]+$` (digits, optional decimal point, optional `$` prefix). Reject if it contains spaces, semicolons, pipes, backticks, or other shell metacharacters.
+- **from / to**: Must be a known alias (`usdc`, `eth`, `weth`) or a valid `0x` hex address (`^0x[0-9a-fA-F]{40}$`). Reject any other value.
+- **slippage**: Must be a positive integer (`^\d+$`).
+
+Do not pass unvalidated user input into the command.
+
 ## Examples
 
 ```bash

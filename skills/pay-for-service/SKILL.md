@@ -49,6 +49,16 @@ X402 uses USDC atomic units (6 decimals):
 
 **IMPORTANT**: Always single-quote amounts that use `$` to prevent bash variable expansion (e.g. `'$1.00'` not `$1.00`).
 
+## Input Validation
+
+Before constructing the command, validate all user-provided values to prevent shell injection:
+
+- **url**: Must be a valid URL starting with `https://` or `http://`. Reject if it contains spaces, semicolons, pipes, backticks, or shell metacharacters.
+- **data (-d)**: Must be valid JSON. Always wrap in single quotes to prevent shell expansion.
+- **max-amount**: Must be a positive integer (`^\d+$`).
+
+Do not pass unvalidated user input into the command.
+
 ## Examples
 
 ```bash

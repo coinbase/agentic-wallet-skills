@@ -26,6 +26,15 @@ npx awal@2.0.3 x402 pay https://x402.cdp.coinbase.com/platform/v2/data/query/run
 
 **IMPORTANT**: Always single-quote the `-d` JSON string to prevent bash variable expansion.
 
+## Input Validation
+
+Before constructing the command, validate inputs to prevent shell injection:
+
+- **SQL query**: Always embed the query inside a single-quoted JSON string (`-d '{"sql": "..."}'`). Never use double quotes for the outer `-d` wrapper, as this enables shell expansion of `$` and backticks within the query.
+- **Addresses**: Must be valid `0x` hex addresses (`^0x[0-9a-fA-F]{40}$`). Reject any value containing shell metacharacters.
+
+Do not pass unvalidated user input into the command.
+
 ## CRITICAL: Indexed Fields
 
 Queries against `base.events` **MUST** filter on indexed fields to avoid full table scans. The indexed fields are:
