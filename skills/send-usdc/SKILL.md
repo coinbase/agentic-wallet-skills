@@ -73,7 +73,7 @@ ENS names are automatically resolved to addresses via Ethereum mainnet. The comm
 
 ## Prerequisites
 
-- Must be authenticated (`npx awal@2.0.3 awal status` to check, `npx awal@2.0.3 awal auth login` to sign in, see skill `authenticate-wallet` for more information)
+- Must be authenticated (`npx awal@2.0.3 status` to check, `npx awal@2.0.3 auth login` to sign in, see skill `authenticate-wallet` for more information)
 - Wallet must have sufficient USDC balance (`npx awal balance` to check)
 
 ## Error Handling
