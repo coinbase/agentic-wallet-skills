@@ -1,9 +1,15 @@
 ---
 name: query-onchain-data
-description: Query onchain data on Base using the CDP SQL API via x402. Use when you or your user want to view onchain information about decoded blocks, transactions, and event.
-user-invocable: true
-disable-model-invocation: false
-allowed-tools: ["Bash(npx awal@2.0.3 status*)", "Bash(npx awal@2.0.3 balance*)", "Bash(npx awal@2.0.3 x402 pay *)"]
+description: >
+  Queries decoded onchain data on Base (events, transactions, blocks, transfers) using CoinbaseQL via the CDP SQL API at x402.cdp.coinbase.com. Runs SQL queries through `npx awal x402 pay` at $0.10 per query.
+  Use when the user wants to view onchain information, look up transactions, check token transfers, query smart contract events, inspect blocks, or analyse Base network activity.
+metadata:
+  user-invocable: true
+  disable-model-invocation: false
+allowed-tools: |
+  Bash(npx awal@2.0.3 status*)
+  Bash(npx awal@2.0.3 balance*)
+  Bash(npx awal@2.0.3 x402 pay *)
 ---
 
 # Query Onchain Data on Base

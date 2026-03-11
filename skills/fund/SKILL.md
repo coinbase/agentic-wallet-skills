@@ -1,9 +1,16 @@
 ---
 name: fund
-description: Add money to the wallet. Use when you or the user want to fund, deposit, top up, load, buy USDC, add funds, onramp, or get USDC. Also use when the wallet has insufficient balance for a send or trade operation, or when someone asks "how do I get USDC?"
-user-invocable: true
-disable-model-invocation: false
-allowed-tools: ["Bash(npx awal@2.0.3 status*)", "Bash(npx awal@2.0.3 show*)", "Bash(npx awal@2.0.3 address*)", "Bash(npx awal@2.0.3 balance*)"]
+description: >
+  Adds USDC to the agentic wallet via Coinbase Onramp using `npx awal show`. Supports Apple Pay, debit card, bank transfer, and Coinbase account funding.
+  Use when the user wants to fund, deposit, top up, load, buy USDC, add funds, onramp, or get USDC, when the wallet has insufficient balance for a send or trade operation, or when someone asks "how do I get USDC?"
+metadata:
+  user-invocable: true
+  disable-model-invocation: false
+allowed-tools: |
+  Bash(npx awal@2.0.3 status*)
+  Bash(npx awal@2.0.3 show*)
+  Bash(npx awal@2.0.3 address*)
+  Bash(npx awal@2.0.3 balance*)
 ---
 
 # Funding the Wallet
