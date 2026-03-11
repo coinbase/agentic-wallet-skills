@@ -1,8 +1,11 @@
 ---
 name: x402
-description: Search for new services and make paid API requests using the x402 payment protocol. Use when you don't have a clear tool to choose, search the bazaar. You can also use this tool if you or the user want to call an x402 endpoint, discover payment requirements, browse the bazaar, or search for paid services.
-user-invocable: true
-disable-model-invocation: false
+description: >
+  Searches the x402 Bazaar for paid API services and makes USDC-paid requests using `npx awal x402`. Combines bazaar search, endpoint discovery via `x402 details`, and paid API calls via `x402 pay` into a single workflow.
+  Use when the user wants to find and call paid services, discover x402 endpoint payment requirements, browse the bazaar, search for paid APIs, or when no other skill clearly matches the task. Covers "find a service", "pay for API", "what services are available", "micropayments".
+metadata:
+  user-invocable: true
+  disable-model-invocation: false
 ---
 
 # x402 Payment Protocol
@@ -14,8 +17,9 @@ Use the `npx awal@2.0.3 x402` commands to discover, inspect, and call paid API e
 The typical x402 workflow is:
 
 1. **Find a service** - Search the bazaar or get details for a known endpoint
-2. **Check requirements** - Inspect price, method, and input schema
-3. **Make the request** - Call the endpoint with automatic USDC payment
+2. **Check requirements** - Inspect price, method, and input schema via `awal x402 details <url>`
+3. **Verify balance** - Confirm sufficient USDC balance with `awal balance` before paying
+4. **Make the request** - Call the endpoint with automatic USDC payment via `awal x402 pay`
 
 ## Commands
 

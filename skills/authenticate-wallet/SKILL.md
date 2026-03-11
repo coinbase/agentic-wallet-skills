@@ -1,9 +1,17 @@
 ---
 name: authenticate-wallet
-description: Sign in to the wallet. Use when you or the user want to log in, sign in, connect, or set up the wallet, or when any wallet operation fails with authentication or "not signed in" errors. This skill is a prerequisite before sending, trading, or funding.
-user-invocable: true
-disable-model-invocation: false
-allowed-tools: ["Bash(npx awal@2.0.3 status*)", "Bash(npx awal@2.0.3 auth *)", "Bash(npx awal@2.0.3 balance*)", "Bash(npx awal@2.0.3 address*)", "Bash(npx awal@2.0.3 show*)"]
+description: >
+  Signs in to the agentic wallet via email OTP using the awal CLI. Runs `npx awal auth login` to send an OTP code, then `npx awal auth verify` to complete authentication.
+  Use when the user wants to log in, sign in, connect, or set up the wallet, when any wallet operation fails with authentication or "not signed in" errors, or before sending, trading, or funding operations that require an active session.
+metadata:
+  user-invocable: true
+  disable-model-invocation: false
+allowed-tools: |
+  Bash(npx awal@2.0.3 status*)
+  Bash(npx awal@2.0.3 auth *)
+  Bash(npx awal@2.0.3 balance*)
+  Bash(npx awal@2.0.3 address*)
+  Bash(npx awal@2.0.3 show*)
 ---
 
 # Authenticating with the Payments Wallet

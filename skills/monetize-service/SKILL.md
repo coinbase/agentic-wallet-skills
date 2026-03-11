@@ -1,9 +1,20 @@
 ---
 name: monetize-service
-description: Build and deploy a paid API that other agents can pay to use via x402. Use when you or the user want to monetize an API, make money, earn money, offer a service, sell a service to other agents, charge for endpoints, create a paid endpoint, or set up a paid service. Covers "make money by offering an endpoint", "sell a service", "monetize your data", "create a paid API".
-user-invocable: true
-disable-model-invocation: false
-allowed-tools: ["Bash(npx awal@2.0.3 status*)", "Bash(npx awal@2.0.3 address*)", "Bash(npx awal@2.0.3 x402 details *)", "Bash(npx awal@2.0.3 x402 pay *)", "Bash(npm *)", "Bash(node *)", "Bash(curl *)", "Bash(mkdir *)"]
+description: >
+  Builds and deploys a paid Express API server that charges USDC per request via the x402 payment protocol. Sets up paymentMiddleware, x402ResourceServer, and Bazaar discovery so other agents can find and pay for the service automatically.
+  Use when the user wants to monetize an API, make money, earn money, offer a service, sell a service to other agents, charge for endpoints, create a paid endpoint, set up a paid service, or build an x402 server. Covers "make money by offering an endpoint", "sell a service", "monetize your data", "create a paid API".
+metadata:
+  user-invocable: true
+  disable-model-invocation: false
+allowed-tools: |
+  Bash(npx awal@2.0.3 status*)
+  Bash(npx awal@2.0.3 address*)
+  Bash(npx awal@2.0.3 x402 details *)
+  Bash(npx awal@2.0.3 x402 pay *)
+  Bash(npm *)
+  Bash(node *)
+  Bash(curl *)
+  Bash(mkdir *)
 ---
 
 # Build an x402 Payment Server
