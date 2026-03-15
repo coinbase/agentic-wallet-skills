@@ -74,13 +74,13 @@ ENS names are automatically resolved to addresses via Ethereum mainnet. The comm
 ## Prerequisites
 
 - Must be authenticated (`npx awal@2.0.3 status` to check, `npx awal@2.0.3 auth login` to sign in, see skill `authenticate-wallet` for more information)
-- Wallet must have sufficient USDC balance (`npx awal balance` to check)
+- Wallet must have sufficient USDC balance (`npx awal@2.0.3 balance` to check)
 
 ## Error Handling
 
 Common errors:
 
-- "Not authenticated" - Run `awal auth login <email>` first
-- "Insufficient balance" - Check balance with `awal balance`
+- "Not authenticated" - Run `npx awal@2.0.3 auth login <email>` first
+- "Insufficient balance" - Check balance with `npx awal@2.0.3 balance`
 - "Could not resolve ENS name" - Verify the ENS name exists
 - "Invalid recipient" - Must be valid 0x address or ENS name
