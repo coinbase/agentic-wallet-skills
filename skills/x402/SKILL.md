@@ -7,7 +7,7 @@ disable-model-invocation: false
 
 # x402 Payment Protocol
 
-Use the `npx awal@2.0.3 x402` commands to discover, inspect, and call paid API endpoints using the X402 payment protocol. Payments are made in USDC on Base.
+Use the `npx awal@2.8.0 x402` commands to discover, inspect, and call paid API endpoints using the X402 payment protocol. Payments are made in USDC on Base.
 
 ## Workflow
 
@@ -24,37 +24,41 @@ The typical x402 workflow is:
 Find paid services by keyword using BM25 relevance search:
 
 ```bash
-npx awal@2.0.3 x402 bazaar search <query> [-k <n>] [--force-refresh] [--json]
+npx awal@2.8.0 x402 bazaar search <query> [-k <n>] [--network <network>] [--scheme <scheme>] [--max-price <price>] [--json]
 ```
 
-| Option            | Description                          |
-| ----------------- | ------------------------------------ |
-| `-k, --top <n>`   | Number of results (default: 5)       |
-| `--force-refresh` | Re-fetch resource index from CDP API |
-| `--json`          | Output as JSON                       |
-
-Results are cached locally at `~/.config/awal/bazaar/` and auto-refresh after 12 hours.
+| Option                  | Description                                                              |
+| ----------------------- | ------------------------------------------------------------------------ |
+| `-k, --top <n>`         | Number of results, 1–20 (default: 20)                                    |
+| `--network <name>`      | Filter by chain (base, base-sepolia, polygon, solana, solana-devnet)     |
+| `--scheme <scheme>`     | Filter by payment scheme: `exact` or `upto`                              |
+| `--max-price <price>`   | Maximum price in USD (e.g. `0.01`)                                       |
+| `--asset <address>`     | Filter by payment asset address                                          |
+| `--pay-to <address>`    | Filter by recipient wallet address                                       |
+| `--extensions <type>`   | Filter by extension type (e.g. `outputSchema`, `bazaar`)                 |
+| `--json`                | Output as JSON                                                           |
 
 ### List Bazaar Resources
 
 Browse all available resources:
 
 ```bash
-awal x402 bazaar list [--network <network>] [--full] [--json]
+npx awal@2.8.0 x402 bazaar list [--network <network>] [--full] [--refresh] [--json]
 ```
 
-| Option             | Description                             |
-| ------------------ | --------------------------------------- |
-| `--network <name>` | Filter by network (base, base-sepolia)  |
-| `--full`           | Show complete details including schemas |
-| `--json`           | Output as JSON                          |
+| Option             | Description                                                          |
+| ------------------ | -------------------------------------------------------------------- |
+| `--network <name>` | Filter by chain (base, base-sepolia, polygon, solana, solana-devnet) |
+| `--full`           | Show complete details including schemas                              |
+| `--refresh`        | Re-fetch resource index from CDP API                                 |
+| `--json`           | Output as JSON                                                       |
 
 ### Discover Payment Requirements
 
 Inspect an endpoint's x402 payment requirements without paying:
 
 ```bash
-awal x402 details <url> [--json]
+npx awal@2.8.0 x402 details <url> [--json]
 ```
 
 Auto-detects the correct HTTP method (GET, POST, PUT, DELETE, PATCH) by trying each until it gets a 402 response, then displays price, accepted payment schemes, network, and input/output schemas.
@@ -64,7 +68,7 @@ Auto-detects the correct HTTP method (GET, POST, PUT, DELETE, PATCH) by trying e
 Call an x402 endpoint with automatic USDC payment:
 
 ```bash
-awal x402 pay <url> [-X <method>] [-d <json>] [-q <params>] [-h <json>] [--max-amount <n>] [--json]
+npx awal@2.8.0 x402 pay <url> [-X <method>] [-d <json>] [-q <params>] [-h <json>] [--max-amount <n>] [--json]
 ```
 
 | Option                  | Description                                        |
@@ -81,25 +85,25 @@ awal x402 pay <url> [-X <method>] [-d <json>] [-q <params>] [-h <json>] [--max-a
 
 ```bash
 # Search for weather-related paid APIs
-awal x402 bazaar search "weather"
+npx awal@2.8.0 x402 bazaar search "weather"
 
 # Search with more results
-awal x402 bazaar search "sentiment analysis" -k 10
+npx awal@2.8.0 x402 bazaar search "sentiment analysis" -k 10
 
 # Check what an endpoint costs
-awal x402 details https://example.com/api/weather
+npx awal@2.8.0 x402 details https://example.com/api/weather
 
 # Make a GET request (auto-pays)
-awal x402 pay https://example.com/api/weather
+npx awal@2.8.0 x402 pay https://example.com/api/weather
 
 # Make a POST request with body
-awal x402 pay https://example.com/api/sentiment -X POST -d '{"text": "I love this product"}'
+npx awal@2.8.0 x402 pay https://example.com/api/sentiment -X POST -d '{"text": "I love this product"}'
 
 # Limit max payment to $0.10
-awal x402 pay https://example.com/api/data --max-amount 100000
+npx awal@2.8.0 x402 pay https://example.com/api/data --max-amount 100000
 
 # Browse all bazaar resources with full details
-awal x402 bazaar list --full
+npx awal@2.8.0 x402 bazaar list --full
 ```
 
 ## USDC Amounts
@@ -116,11 +120,11 @@ X402 uses USDC atomic units (6 decimals):
 ## Prerequisites
 
 - **Search/Details**: No authentication needed
-- **Pay**: Must be authenticated (`awal auth login <email>`) with sufficient USDC balance (`awal balance`)
+- **Pay**: Must be authenticated (`npx awal@2.8.0 auth login <email>`) with sufficient USDC balance (`npx awal@2.8.0 balance`)
 
 ## Error Handling
 
-- "Not authenticated" - Run `awal auth login <email>` first
+- "Not authenticated" - Run `npx awal@2.8.0 auth login <email>` first
 - "No X402 payment requirements found" - URL may not be an x402 endpoint
 - "CDP API returned 429" - Rate limited; cached data will be used if available
-- "Insufficient balance" - Fund wallet with USDC (`awal balance` to check)
+- "Insufficient balance" - Fund wallet with USDC (`npx awal@2.8.0 balance` to check)
