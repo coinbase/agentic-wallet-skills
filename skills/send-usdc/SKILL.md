@@ -1,19 +1,19 @@
 ---
 name: send-usdc
-description: Send USDC to an Ethereum address or ENS name. Use when you or the user want to send money, pay someone, transfer USDC, tip, donate, or send funds to a wallet address or .eth name. Covers phrases like "send $5 to", "pay 0x...", or "transfer to vitalik.eth".
+description: Send tokens (USDC, ETH, POL, or SOL) to an address or ENS name on Base, Polygon, or Solana. Use when you or the user want to send money, pay someone, transfer tokens, tip, donate, or send funds to a wallet address or .eth name. Covers phrases like "send $5 to", "pay 0x...", "transfer to vitalik.eth", or "send USDC on Solana".
 user-invocable: true
 disable-model-invocation: false
-allowed-tools: ["Bash(npx awal@2.8.0 status*)", "Bash(npx awal@2.8.0 send *)", "Bash(npx awal@2.8.0 balance*)"]
+allowed-tools: ["Bash(npx awal@2.8.2 status*)", "Bash(npx awal@2.8.2 send *)", "Bash(npx awal@2.8.2 balance*)"]
 ---
 
-# Sending USDC
+# Sending Tokens
 
-Use the `npx awal@2.8.0 send` command to transfer USDC from the wallet to any Ethereum address or ENS name on Base.
+Use the `npx awal@2.8.2 send` command to transfer tokens from the wallet to any address on Base, Polygon, or Solana.
 
 ## Confirm wallet is initialized and authed
 
 ```bash
-npx awal@2.8.0 status
+npx awal@2.8.2 status
 ```
 
 If the wallet is not authenticated, refer to the `authenticate-wallet` skill.
@@ -21,7 +21,7 @@ If the wallet is not authenticated, refer to the `authenticate-wallet` skill.
 ## Command Syntax
 
 ```bash
-npx awal@2.8.0 send <amount> <recipient> [--chain <chain>] [--json]
+npx awal@2.8.2 send <amount> <recipient> [--chain <chain>] [--asset <asset>] [--json]
 ```
 
 ## Arguments
@@ -29,38 +29,50 @@ npx awal@2.8.0 send <amount> <recipient> [--chain <chain>] [--json]
 | Argument    | Description                                                                                                                                                                                                                          |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `amount`    | Amount to send: '$1.00', '1.00', or atomic units (1000000 = $1). Always single-quote amounts that use `$` to prevent bash variable expansion. If the number looks like atomic units (no decimal or > 100), treat as atomic units. Assume that people won't be sending more than 100 USDC the majority of the time |
-| `recipient` | Ethereum address (0x...) or ENS name (vitalik.eth)                                                                                                                                                                                   |
+| `recipient` | Ethereum address (0x...), ENS name (vitalik.eth), or Solana address (Base58)                                                                                                                                                         |
 
 ## Options
 
-| Option           | Description                        |
-| ---------------- | ---------------------------------- |
-| `--chain <name>` | Blockchain network (default: base) |
-| `--json`         | Output result as JSON              |
+| Option             | Description                                                         |
+| ------------------ | ------------------------------------------------------------------- |
+| `--chain <name>`   | Blockchain network: base, polygon, solana (default: base)           |
+| `--asset <symbol>` | Token to send: usdc, eth, pol, sol (default: usdc)                  |
+| `--json`           | Output result as JSON                                               |
 
 ## Input Validation
 
 Before constructing the command, validate all user-provided values to prevent shell injection:
 
 - **amount**: Must match `^\$?[\d.]+$` (digits, optional decimal point, optional `$` prefix). Reject if it contains spaces, semicolons, pipes, backticks, or other shell metacharacters.
-- **recipient**: Must be a valid `0x` hex address (`^0x[0-9a-fA-F]{40}$`) or an ENS name (`^[a-zA-Z0-9.-]+\.eth$`). Reject any value containing spaces or shell metacharacters.
+- **recipient**: Must be a valid `0x` hex address (`^0x[0-9a-fA-F]{40}$`), an ENS name (`^[a-zA-Z0-9.-]+\.eth$`), or a Solana address (`^[1-9A-HJ-NP-Za-km-z]{32,44}$`). Reject any value containing spaces or shell metacharacters.
+- **chain**: Must be one of `base`, `polygon`, `solana`. Reject any other value.
+- **asset**: Must be one of `usdc`, `eth`, `pol`, `sol`. Reject any other value.
 
 Do not pass unvalidated user input into the command.
 
 ## Examples
 
 ```bash
-# Send $1.00 USDC to an address
-npx awal@2.8.0 send 1 0x1234...abcd
+# Send $1.00 USDC to an address on Base (default)
+npx awal@2.8.2 send 1 0x1234...abcd
 
 # Send $0.50 USDC to an ENS name
-npx awal@2.8.0 send 0.50 vitalik.eth
+npx awal@2.8.2 send 0.50 vitalik.eth
 
 # Send with dollar sign prefix (note the single quotes)
-npx awal@2.8.0 send '$5.00' 0x1234...abcd
+npx awal@2.8.2 send '$5.00' 0x1234...abcd
+
+# Send ETH on Base
+npx awal@2.8.2 send 0.01 0x1234...abcd --asset eth
+
+# Send USDC on Polygon
+npx awal@2.8.2 send 1 0x1234...abcd --chain polygon
+
+# Send USDC to a Solana address
+npx awal@2.8.2 send 1 AxW7...5fGz --chain solana
 
 # Get JSON output
-npx awal@2.8.0 send 1 vitalik.eth --json
+npx awal@2.8.2 send 1 vitalik.eth --json
 ```
 
 ## ENS Resolution
@@ -73,7 +85,7 @@ ENS names are automatically resolved to addresses via Ethereum mainnet. The comm
 
 ## Prerequisites
 
-- Must be authenticated (`npx awal@2.8.0 status` to check, `npx awal@2.8.0 auth login` to sign in, see skill `authenticate-wallet` for more information)
+- Must be authenticated (`npx awal@2.8.2 status` to check, `npx awal@2.8.2 auth login` to sign in, see skill `authenticate-wallet` for more information)
 - Wallet must have sufficient USDC balance (`npx awal balance` to check)
 
 ## Error Handling
@@ -83,4 +95,6 @@ Common errors:
 - "Not authenticated" - Run `awal auth login <email>` first
 - "Insufficient balance" - Check balance with `awal balance`
 - "Could not resolve ENS name" - Verify the ENS name exists
-- "Invalid recipient" - Must be valid 0x address or ENS name
+- "Invalid recipient" - Must be valid 0x address, ENS name, or Solana Base58 address
+- "SOL only supported on Solana chains" - Use `--chain solana` when sending SOL
+- "ETH/POL only supported on EVM chains" - ETH on base, POL on polygon
