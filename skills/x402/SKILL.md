@@ -21,7 +21,7 @@ The typical x402 workflow is:
 
 ### Search the Bazaar
 
-Find paid services by keyword using BM25 relevance search:
+Find paid services by keyword using CDP's vector search:
 
 ```bash
 npx awal@2.8.2 x402 bazaar search <query> [-k <n>] [--network <network>] [--scheme <scheme>] [--max-price <price>] [--json]

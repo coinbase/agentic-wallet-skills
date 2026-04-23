@@ -1,6 +1,6 @@
 ---
 name: send-usdc
-description: Send tokens (USDC, ETH, SOL, POL) to an address or ENS name on Base, Polygon, or Solana. Use when you or the user want to send money, pay someone, transfer tokens, tip, donate, or send funds to a wallet address or .eth name. Covers phrases like "send $5 to", "pay 0x...", "transfer to vitalik.eth", or "send USDC on Solana".
+description: Send tokens (USDC, ETH, or SOL) to an address or ENS name on Base, Polygon, or Solana. Use when you or the user want to send money, pay someone, transfer tokens, tip, donate, or send funds to a wallet address or .eth name. Covers phrases like "send $5 to", "pay 0x...", "transfer to vitalik.eth", or "send USDC on Solana".
 user-invocable: true
 disable-model-invocation: false
 allowed-tools: ["Bash(npx awal@2.8.2 status*)", "Bash(npx awal@2.8.2 send *)", "Bash(npx awal@2.8.2 balance*)"]
@@ -36,7 +36,7 @@ npx awal@2.8.2 send <amount> <recipient> [--chain <chain>] [--asset <asset>] [--
 | Option             | Description                                                         |
 | ------------------ | ------------------------------------------------------------------- |
 | `--chain <name>`   | Blockchain network: base, polygon, solana (default: base)           |
-| `--asset <symbol>` | Token to send: usdc, eth, pol, sol (default: usdc)                  |
+| `--asset <symbol>` | Token to send: usdc, eth, sol (default: usdc)                       |
 | `--json`           | Output result as JSON                                               |
 
 ## Input Validation
@@ -46,7 +46,7 @@ Before constructing the command, validate all user-provided values to prevent sh
 - **amount**: Must match `^\$?[\d.]+$` (digits, optional decimal point, optional `$` prefix). Reject if it contains spaces, semicolons, pipes, backticks, or other shell metacharacters.
 - **recipient**: Must be a valid `0x` hex address (`^0x[0-9a-fA-F]{40}$`), an ENS name (`^[a-zA-Z0-9.-]+\.eth$`), or a Solana address (`^[1-9A-HJ-NP-Za-km-z]{32,44}$`). Reject any value containing spaces or shell metacharacters.
 - **chain**: Must be one of `base`, `polygon`, `solana`. Reject any other value.
-- **asset**: Must be one of `usdc`, `eth`, `pol`, `sol`. Reject any other value.
+- **asset**: Must be one of `usdc`, `eth`, `sol`. Reject any other value.
 
 Do not pass unvalidated user input into the command.
 

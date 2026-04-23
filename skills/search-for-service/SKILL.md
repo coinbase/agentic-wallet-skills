@@ -14,7 +14,7 @@ Use the `npx awal@2.8.2 x402` commands to discover and inspect paid API endpoint
 
 ### Search the Bazaar
 
-Find paid services by keyword using vector search with hybrid BM25 ranking:
+Find paid services by keyword using CDP's vector search:
 
 ```bash
 npx awal@2.8.2 x402 bazaar search <query> [-k <n>] [--network <network>] [--scheme <scheme>] [--max-price <price>] [--json]

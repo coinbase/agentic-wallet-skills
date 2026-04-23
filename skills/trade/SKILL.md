@@ -1,6 +1,6 @@
 ---
 name: trade
-description: Swap or trade tokens on Base or Polygon. Use when you or the user want to trade, swap, exchange, buy, sell, or convert between tokens like USDC, ETH, WETH, and POL. Covers phrases like "buy ETH", "sell ETH for USDC", "convert USDC to ETH", "get some ETH", "buy POL".
+description: Swap or trade tokens on Base or Polygon. Use when you or the user want to trade, swap, exchange, buy, sell, or convert between tokens like USDC, ETH, and POL. Covers phrases like "buy ETH", "sell ETH for USDC", "convert USDC to ETH", "get some ETH", "buy POL".
 user-invocable: true
 disable-model-invocation: false
 allowed-tools: ["Bash(npx awal@2.8.2 status*)", "Bash(npx awal@2.8.2 trade *)", "Bash(npx awal@2.8.2 balance*)"]
@@ -26,11 +26,11 @@ npx awal@2.8.2 trade <amount> <from> <to> [options]
 
 ## Arguments
 
-| Argument | Description                                                                 |
-| -------- | --------------------------------------------------------------------------- |
-| `amount` | Amount to swap (see Amount Formats below)                                   |
-| `from`   | Source token: alias (usdc, eth, weth, pol) or contract address (0x...)      |
-| `to`     | Destination token: alias (usdc, eth, weth, pol) or contract address (0x...) |
+| Argument | Description                                                             |
+| -------- | ----------------------------------------------------------------------- |
+| `amount` | Amount to swap (see Amount Formats below)                               |
+| `from`   | Source token: alias (usdc, eth, pol) or contract address (0x...)        |
+| `to`     | Destination token: alias (usdc, eth, pol) or contract address (0x...)   |
 
 ## Amount Formats
 
@@ -45,7 +45,7 @@ The amount can be specified in multiple formats:
 
 **Auto-detection**: Large integers without a decimal point are treated as atomic units. For example, `500000` for USDC (6 decimals) = $0.50.
 
-**Decimals**: For known tokens (usdc=6, eth=18, weth=18, pol=18), decimals are automatic. For arbitrary contract addresses, decimals are read from the token contract.
+**Decimals**: For known tokens (usdc=6, eth=18, pol=18), decimals are automatic. For arbitrary contract addresses, decimals are read from the token contract.
 
 ## Options
 
@@ -57,12 +57,11 @@ The amount can be specified in multiple formats:
 
 ## Token Aliases
 
-| Alias | Token | Decimals | Chain   | Address                                    |
-| ----- | ----- | -------- | ------- | ------------------------------------------ |
-| usdc  | USDC  | 6        | base    | 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913 |
-| eth   | ETH   | 18       | base    | 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE |
-| weth  | WETH  | 18       | base    | 0x4200000000000000000000000000000000000006 |
-| pol   | POL   | 18       | polygon | native token                               |
+| Alias | Token | Decimals | Chain   |
+| ----- | ----- | -------- | ------- |
+| usdc  | USDC  | 6        | base    |
+| eth   | ETH   | 18       | base    |
+| pol   | POL   | 18       | polygon |
 
 **IMPORTANT**: Always single-quote amounts that use `$` to prevent bash variable expansion (e.g. `'$1.00'` not `$1.00`).
 
@@ -71,7 +70,7 @@ The amount can be specified in multiple formats:
 Before constructing the command, validate all user-provided values to prevent shell injection:
 
 - **amount**: Must match `^\$?[\d.]+$` (digits, optional decimal point, optional `$` prefix). Reject if it contains spaces, semicolons, pipes, backticks, or other shell metacharacters.
-- **from / to**: Must be a known alias (`usdc`, `eth`, `weth`, `pol`) or a valid `0x` hex address (`^0x[0-9a-fA-F]{40}$`). Reject any other value.
+- **from / to**: Must be a known alias (`usdc`, `eth`, `pol`) or a valid `0x` hex address (`^0x[0-9a-fA-F]{40}$`). Reject any other value.
 - **slippage**: Must be a positive integer (`^\d+$`).
 
 Do not pass unvalidated user input into the command.
@@ -114,7 +113,7 @@ npx awal@2.8.2 trade '$1' usdc pol --chain polygon
 Common errors:
 
 - "Not authenticated" - Run `awal auth login <email>` first
-- "Invalid token" - Use a valid alias (usdc, eth, weth, pol) or 0x address
+- "Invalid token" - Use a valid alias (usdc, eth, pol) or 0x address
 - "POL only supported on polygon chain" - Use `--chain polygon` when trading POL
 - "Cannot swap a token to itself" - From and to must be different
 - "Swap failed: TRANSFER_FROM_FAILED" - Insufficient balance or approval issue
