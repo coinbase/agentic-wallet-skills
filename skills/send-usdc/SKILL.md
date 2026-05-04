@@ -3,17 +3,17 @@ name: send-usdc
 description: Send tokens (USDC, ETH, POL, or SOL) to an address or ENS name on Base, Polygon, or Solana. Use when you or the user want to send money, pay someone, transfer tokens, tip, donate, or send funds to a wallet address or .eth name. Covers phrases like "send $5 to", "pay 0x...", "transfer to vitalik.eth", or "send USDC on Solana".
 user-invocable: true
 disable-model-invocation: false
-allowed-tools: ["Bash(npx awal@2.8.2 status*)", "Bash(npx awal@2.8.2 send *)", "Bash(npx awal@2.8.2 balance*)"]
+allowed-tools: ["Bash(npx awal@2.10.0 status*)", "Bash(npx awal@2.10.0 send *)", "Bash(npx awal@2.10.0 balance*)"]
 ---
 
 # Sending Tokens
 
-Use the `npx awal@2.8.2 send` command to transfer tokens from the wallet to any address on Base, Polygon, or Solana.
+Use the `npx awal@2.10.0 send` command to transfer tokens from the wallet to any address on Base, Polygon, or Solana.
 
 ## Confirm wallet is initialized and authed
 
 ```bash
-npx awal@2.8.2 status
+npx awal@2.10.0 status
 ```
 
 If the wallet is not authenticated, refer to the `authenticate-wallet` skill.
@@ -21,7 +21,7 @@ If the wallet is not authenticated, refer to the `authenticate-wallet` skill.
 ## Command Syntax
 
 ```bash
-npx awal@2.8.2 send <amount> <recipient> [--chain <chain>] [--asset <asset>] [--json]
+npx awal@2.10.0 send <amount> <recipient> [--chain <chain>] [--asset <asset>] [--json]
 ```
 
 ## Arguments
@@ -54,25 +54,25 @@ Do not pass unvalidated user input into the command.
 
 ```bash
 # Send $1.00 USDC to an address on Base (default)
-npx awal@2.8.2 send 1 0x1234...abcd
+npx awal@2.10.0 send 1 0x1234...abcd
 
 # Send $0.50 USDC to an ENS name
-npx awal@2.8.2 send 0.50 vitalik.eth
+npx awal@2.10.0 send 0.50 vitalik.eth
 
 # Send with dollar sign prefix (note the single quotes)
-npx awal@2.8.2 send '$5.00' 0x1234...abcd
+npx awal@2.10.0 send '$5.00' 0x1234...abcd
 
 # Send ETH on Base
-npx awal@2.8.2 send 0.01 0x1234...abcd --asset eth
+npx awal@2.10.0 send 0.01 0x1234...abcd --asset eth
 
 # Send USDC on Polygon
-npx awal@2.8.2 send 1 0x1234...abcd --chain polygon
+npx awal@2.10.0 send 1 0x1234...abcd --chain polygon
 
 # Send USDC to a Solana address
-npx awal@2.8.2 send 1 AxW7...5fGz --chain solana
+npx awal@2.10.0 send 1 AxW7...5fGz --chain solana
 
 # Get JSON output
-npx awal@2.8.2 send 1 vitalik.eth --json
+npx awal@2.10.0 send 1 vitalik.eth --json
 ```
 
 ## ENS Resolution
@@ -85,7 +85,7 @@ ENS names are automatically resolved to addresses via Ethereum mainnet. The comm
 
 ## Prerequisites
 
-- Must be authenticated (`npx awal@2.8.2 status` to check, `npx awal@2.8.2 auth login` to sign in, see skill `authenticate-wallet` for more information)
+- Must be authenticated (`npx awal@2.10.0 status` to check, `npx awal@2.10.0 auth login` to sign in, see skill `authenticate-wallet` for more information)
 - Wallet must have sufficient USDC balance (`npx awal balance` to check)
 
 ## Error Handling

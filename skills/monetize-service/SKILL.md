@@ -3,7 +3,7 @@ name: monetize-service
 description: Build and deploy a paid API that other agents can pay to use via x402. Use when you or the user want to monetize an API, make money, earn money, offer a service, sell a service to other agents, charge for endpoints, create a paid endpoint, or set up a paid service. Covers "make money by offering an endpoint", "sell a service", "monetize your data", "create a paid API".
 user-invocable: true
 disable-model-invocation: false
-allowed-tools: ["Bash(npx awal@2.8.2 status*)", "Bash(npx awal@2.8.2 address*)", "Bash(npx awal@2.8.2 x402 details *)", "Bash(npx awal@2.8.2 x402 pay *)", "Bash(npm *)", "Bash(node *)", "Bash(curl *)", "Bash(mkdir *)"]
+allowed-tools: ["Bash(npx awal@2.10.0 status*)", "Bash(npx awal@2.10.0 address*)", "Bash(npx awal@2.10.0 x402 details *)", "Bash(npx awal@2.10.0 x402 pay *)", "Bash(npm *)", "Bash(node *)", "Bash(curl *)", "Bash(mkdir *)"]
 ---
 
 # Build an x402 Payment Server
@@ -17,7 +17,7 @@ x402 is an HTTP-native payment protocol. When a client hits a protected endpoint
 ## Confirm wallet is initialized and authed
 
 ```bash
-npx awal@2.8.2 status
+npx awal@2.10.0 status
 ```
 
 If the wallet is not authenticated, refer to the `authenticate-wallet` skill.
@@ -27,7 +27,7 @@ If the wallet is not authenticated, refer to the `authenticate-wallet` skill.
 Run this to get the wallet address that will receive payments:
 
 ```bash
-npx awal@2.8.2 address
+npx awal@2.10.0 address
 ```
 
 Use this address as the `payTo` value.
@@ -380,10 +380,10 @@ Once the server is running, use the `pay-for-service` skill to test payments:
 
 ```bash
 # Check the endpoint's payment requirements
-npx awal@2.8.2 x402 details http://localhost:3000/api/example
+npx awal@2.10.0 x402 details http://localhost:3000/api/example
 
 # Make a paid request
-npx awal@2.8.2 x402 pay http://localhost:3000/api/example
+npx awal@2.10.0 x402 pay http://localhost:3000/api/example
 ```
 
 ## Pricing Guidelines
@@ -397,11 +397,11 @@ npx awal@2.8.2 x402 pay http://localhost:3000/api/example
 
 ## Checklist
 
-- [ ] Get wallet address with `npx awal@2.8.2 address`
+- [ ] Get wallet address with `npx awal@2.10.0 address`
 - [ ] Install `express`, `@x402/express`, `@x402/core`, `@x402/evm`, and `@x402/extensions`
 - [ ] Create `x402ResourceServer` with facilitator client and register `ExactEvmScheme` for `eip155:8453`
 - [ ] Define routes with prices, descriptions, and discovery extensions (Bazaar auto-registers when routes declare it)
 - [ ] Register payment middleware before protected routes
 - [ ] Keep health/status endpoints before payment middleware
-- [ ] Test with `curl` (should get 402) and `npx awal@2.8.2 x402 pay` (should get 200)
+- [ ] Test with `curl` (should get 402) and `npx awal@2.10.0 x402 pay` (should get 200)
 - [ ] Announce your service so other agents can find and use it

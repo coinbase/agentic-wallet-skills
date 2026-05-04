@@ -3,10 +3,10 @@ name: authenticate-wallet
 description: Sign in to the wallet. Use when you or the user want to log in, sign in, connect, or set up the wallet, or when any wallet operation fails with authentication or "not signed in" errors. This skill is a prerequisite before sending, trading, or funding.
 user-invocable: true
 disable-model-invocation: false
-allowed-tools: ["Bash(npx awal@2.8.2 status*)", "Bash(npx awal@2.8.2 auth *)", "Bash(npx awal@2.8.2 balance*)", "Bash(npx awal@2.8.2 address*)", "Bash(npx awal@2.8.2 show*)"]
+allowed-tools: ["Bash(npx awal@2.10.0 status*)", "Bash(npx awal@2.10.0 auth *)", "Bash(npx awal@2.10.0 balance*)", "Bash(npx awal@2.10.0 address*)", "Bash(npx awal@2.10.0 show*)"]
 ---
 
-# Authenticating with the Payments Wallet
+# Authenticating with the Agentic Wallet
 
 When the wallet is not signed in (detected via `npx awal status` or when wallet operations fail with authentication errors), use the `npx awal` CLI to authenticate.
 
@@ -19,7 +19,7 @@ Authentication uses a two-step email OTP process:
 ### Step 1: Initiate login
 
 ```bash
-npx awal@2.8.2 auth login <email>
+npx awal@2.10.0 auth login <email>
 ```
 
 This sends a 6-digit verification code to the email and outputs a `flowId`.
@@ -27,7 +27,7 @@ This sends a 6-digit verification code to the email and outputs a `flowId`.
 ### Step 2: Verify OTP
 
 ```bash
-npx awal@2.8.2 auth verify <otp>
+npx awal@2.10.0 auth verify <otp>
 ```
 
 Use the 6-digit code from the user's email to complete authentication. The flow ID from step 1 is saved automatically to a local file — you do not pass it as an argument. If you have the ability to access the user's email, you can read the OTP code, or you can ask your human for the code.
@@ -44,7 +44,7 @@ Do not pass unvalidated user input into the command.
 ## Checking Authentication Status
 
 ```bash
-npx awal@2.8.2 status
+npx awal@2.10.0 status
 ```
 
 Displays wallet server health and authentication status including wallet address.
@@ -53,36 +53,36 @@ Displays wallet server health and authentication status including wallet address
 
 ```bash
 # Check current status
-npx awal@2.8.2 status
+npx awal@2.10.0 status
 
 # Start login (sends OTP to email)
-npx awal@2.8.2 auth login user@example.com
+npx awal@2.10.0 auth login user@example.com
 # Output: flowId: abc123...
 
 # After user receives code, verify (flow ID saved automatically)
-npx awal@2.8.2 auth verify 123456
+npx awal@2.10.0 auth verify 123456
 
 # Confirm authentication
-npx awal@2.8.2 status
+npx awal@2.10.0 status
 ```
 
 ## Available CLI Commands
 
 | Command                                      | Purpose                                |
 | -------------------------------------------- | -------------------------------------- |
-| `npx awal@2.8.2 status`                     | Check server health and auth status    |
-| `npx awal@2.8.2 auth login <email>`         | Send OTP code to email, returns flowId |
-| `npx awal@2.8.2 auth verify <otp>`          | Complete authentication with OTP code  |
-| `npx awal@2.8.2 balance`                    | Get USDC wallet balance                |
-| `npx awal@2.8.2 address`                    | Get wallet address                     |
-| `npx awal@2.8.2 show`                       | Open the wallet companion window       |
+| `npx awal@2.10.0 status`                     | Check server health and auth status    |
+| `npx awal@2.10.0 auth login <email>`         | Send OTP code to email, returns flowId |
+| `npx awal@2.10.0 auth verify <otp>`          | Complete authentication with OTP code  |
+| `npx awal@2.10.0 balance`                    | Get balances across Base, Polygon, and Solana (use `--chain` for a single chain) |
+| `npx awal@2.10.0 address`                    | Get wallet address                     |
+| `npx awal@2.10.0 show`                       | Open the wallet companion window       |
 
 ## JSON Output
 
 All commands support `--json` for machine-readable output:
 
 ```bash
-npx awal@2.8.2 status --json
-npx awal@2.8.2 auth login user@example.com --json
-npx awal@2.8.2 auth verify <otp> --json
+npx awal@2.10.0 status --json
+npx awal@2.10.0 auth login user@example.com --json
+npx awal@2.10.0 auth verify <otp> --json
 ```

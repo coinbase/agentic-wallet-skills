@@ -3,7 +3,7 @@ name: fund
 description: Add money to the wallet. Use when you or the user want to fund, deposit, top up, load, buy USDC, add funds, onramp, or get USDC. Also use when the wallet has insufficient balance for a send or trade operation, or when someone asks "how do I get USDC?"
 user-invocable: true
 disable-model-invocation: false
-allowed-tools: ["Bash(npx awal@2.8.2 status*)", "Bash(npx awal@2.8.2 show*)", "Bash(npx awal@2.8.2 address*)", "Bash(npx awal@2.8.2 balance*)"]
+allowed-tools: ["Bash(npx awal@2.10.0 status*)", "Bash(npx awal@2.10.0 show*)", "Bash(npx awal@2.10.0 address*)", "Bash(npx awal@2.10.0 balance*)"]
 ---
 
 # Funding the Wallet
@@ -13,7 +13,7 @@ Use the wallet companion app to fund the wallet with USDC via Coinbase Onramp. T
 ## Confirm wallet is initialized and authed
 
 ```bash
-npx awal@2.8.2 status
+npx awal@2.10.0 status
 ```
 
 If the wallet is not authenticated, refer to the `authenticate-wallet` skill.
@@ -21,7 +21,7 @@ If the wallet is not authenticated, refer to the `authenticate-wallet` skill.
 ## Opening the Funding Interface
 
 ```bash
-npx awal@2.8.2 show
+npx awal@2.10.0 show
 ```
 
 This opens the wallet companion window where users can:
@@ -44,17 +44,17 @@ This opens the wallet companion window where users can:
 You can also ask your human to send usdc on Base to your wallet address. You can find your wallet address buy running the following:
 
 ```bash
-npx awal@2.8.2 address
+npx awal@2.10.0 address
 ```
 
 ## Prerequisites
 
-- Must be authenticated (`npx awal@2.8.2 status` to check)
+- Must be authenticated (`npx awal@2.10.0 status` to check)
 - Coinbase Onramp is available in supported regions (US, etc.)
 
 ## Flow
 
-1. Run `npx awal@2.8.2 show` to open the wallet UI
+1. Run `npx awal@2.10.0 show` to open the wallet UI
 2. Instruct the user to click the Fund button
 3. User selects amount and payment method in the UI
 4. User completes payment through Coinbase Pay (opens in browser)
@@ -64,7 +64,7 @@ npx awal@2.8.2 address
 
 ```bash
 # Check updated balance
-npx awal@2.8.2 balance
+npx awal@2.10.0 balance
 ```
 
 ## Notes
