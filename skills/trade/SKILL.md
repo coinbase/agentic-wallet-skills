@@ -1,9 +1,7 @@
 ---
 name: trade
-description: Swap or trade tokens on Base or Polygon. Use when you or the user want to trade, swap, exchange, buy, sell, or convert between tokens like USDC, ETH, and POL. Covers phrases like "buy ETH", "sell ETH for USDC", "convert USDC to ETH", "get some ETH", "buy POL".
-user-invocable: true
-disable-model-invocation: false
-allowed-tools: ["Bash(npx awal@2.10.0 status*)", "Bash(npx awal@2.10.0 trade *)", "Bash(npx awal@2.10.0 balance*)"]
+description: "Swap or trade tokens on Base or Polygon. Use when you or the user want to trade, swap, exchange, buy, sell, or convert between tokens like USDC, ETH, and POL. Covers phrases like buy ETH, sell ETH for USDC, convert USDC to ETH, get some ETH, or buy POL."
+allowed-tools: "Bash(npx awal@2.10.0 status*), Bash(npx awal@2.10.0 trade *), Bash(npx awal@2.10.0 balance*)"
 ---
 
 # Trading Tokens
