@@ -1,11 +1,3 @@
----
-name: monetize-service
-description: Build and deploy a paid API that other agents can pay to use via x402. Use when you or the user want to monetize an API, make money, earn money, offer a service, sell a service to other agents, charge for endpoints, create a paid endpoint, or set up a paid service. Covers "make money by offering an endpoint", "sell a service", "monetize your data", "create a paid API".
-user-invocable: true
-disable-model-invocation: false
-allowed-tools: ["Bash(npx awal@2.10.0 status*)", "Bash(npx awal@2.10.0 address*)", "Bash(npx awal@2.10.0 x402 details *)", "Bash(npx awal@2.10.0 x402 pay *)", "Bash(npm *)", "Bash(node *)", "Bash(curl *)", "Bash(mkdir *)"]
----
-
 # Build an x402 Payment Server
 
 Create an Express server that charges USDC for API access using the x402 payment protocol. Callers pay per-request in USDC on Base — no accounts, API keys, or subscriptions needed. Your service is automatically discoverable by other agents via the x402 Bazaar.
@@ -14,13 +6,7 @@ Create an Express server that charges USDC for API access using the x402 payment
 
 x402 is an HTTP-native payment protocol. When a client hits a protected endpoint without paying, the server returns HTTP 402 with payment requirements. The client signs a USDC payment and retries with a payment header. The facilitator verifies and settles the payment, and the server returns the response. Services register with the x402 Bazaar so other agents can discover and pay for them automatically.
 
-## Confirm wallet is initialized and authed
-
-```bash
-npx awal@2.10.0 status
-```
-
-If the wallet is not authenticated, refer to the `authenticate-wallet` skill.
+If the wallet is not authenticated, see `references/auth.md`.
 
 ## Step 1: Get the Payment Address
 
@@ -374,9 +360,9 @@ server.register("eip155:8453", new ExactEvmScheme());
 
 This requires `CDP_API_KEY_ID` and `CDP_API_KEY_SECRET` environment variables. Get these from https://portal.cdp.coinbase.com.
 
-## Testing with the pay-for-service Skill
+## Testing the Server
 
-Once the server is running, use the `pay-for-service` skill to test payments:
+Once the server is running, test payments using the commands in `references/x402-pay.md`:
 
 ```bash
 # Check the endpoint's payment requirements

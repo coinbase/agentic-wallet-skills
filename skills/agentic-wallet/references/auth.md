@@ -1,14 +1,6 @@
----
-name: authenticate-wallet
-description: Sign in to the wallet. Use when you or the user want to log in, sign in, connect, or set up the wallet, or when any wallet operation fails with authentication or "not signed in" errors. This skill is a prerequisite before sending, trading, or funding.
-user-invocable: true
-disable-model-invocation: false
-allowed-tools: ["Bash(npx awal@2.10.0 status*)", "Bash(npx awal@2.10.0 auth *)", "Bash(npx awal@2.10.0 balance*)", "Bash(npx awal@2.10.0 address*)", "Bash(npx awal@2.10.0 show*)"]
----
-
 # Authenticating with the Agentic Wallet
 
-When the wallet is not signed in (detected via `npx awal status` or when wallet operations fail with authentication errors), use the `npx awal` CLI to authenticate.
+When the wallet is not signed in (detected via `npx awal@2.10.0 status` or when wallet operations fail with authentication errors), use the `npx awal` CLI to authenticate.
 
 If you have access to email, you can authenticate the wallet yourself, otherwise you'll need to ask your human to give you an email address and to tell you the OTP code they receive.
 

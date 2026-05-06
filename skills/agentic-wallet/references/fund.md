@@ -1,22 +1,8 @@
----
-name: fund
-description: Add money to the wallet. Use when you or the user want to fund, deposit, top up, load, buy USDC, add funds, onramp, or get USDC. Also use when the wallet has insufficient balance for a send or trade operation, or when someone asks "how do I get USDC?"
-user-invocable: true
-disable-model-invocation: false
-allowed-tools: ["Bash(npx awal@2.10.0 status*)", "Bash(npx awal@2.10.0 show*)", "Bash(npx awal@2.10.0 address*)", "Bash(npx awal@2.10.0 balance*)"]
----
-
 # Funding the Wallet
 
 Use the wallet companion app to fund the wallet with USDC via Coinbase Onramp. This supports multiple payment methods including Apple Pay, debit cards, bank transfers, and funding from a Coinbase account.
 
-## Confirm wallet is initialized and authed
-
-```bash
-npx awal@2.10.0 status
-```
-
-If the wallet is not authenticated, refer to the `authenticate-wallet` skill.
+If the wallet is not authenticated, see `references/auth.md`.
 
 ## Opening the Funding Interface
 
@@ -41,7 +27,7 @@ This opens the wallet companion window where users can:
 
 ## Alternative
 
-You can also ask your human to send usdc on Base to your wallet address. You can find your wallet address buy running the following:
+You can also ask your human to send USDC on Base to your wallet address. Get the address with:
 
 ```bash
 npx awal@2.10.0 address

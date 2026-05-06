@@ -1,22 +1,8 @@
----
-name: query-onchain-data
-description: Query onchain data on Base using the CDP SQL API via x402. Use when you or your user want to view onchain information about decoded blocks, transactions, and events.
-user-invocable: true
-disable-model-invocation: false
-allowed-tools: ["Bash(npx awal@2.10.0 status*)", "Bash(npx awal@2.10.0 balance*)", "Bash(npx awal@2.10.0 x402 pay *)"]
----
-
 # Query Onchain Data on Base
 
 Use the CDP SQL API to query onchain data (events, transactions, blocks, transfers) on Base. Queries are executed via x402 and are charged per query.
 
-## Confirm wallet is initialized and authed
-
-```bash
-npx awal@2.10.0 status
-```
-
-If the wallet is not authenticated, refer to the `authenticate-wallet` skill.
+If the wallet is not authenticated, see `references/auth.md`.
 
 ## Executing a Query
 
@@ -198,12 +184,12 @@ npx awal@2.10.0 x402 pay https://x402.cdp.coinbase.com/platform/v2/data/query/ru
 
 ## Prerequisites
 
-- Must be authenticated (`npx awal@2.10.0 status` to check, see `authenticate-wallet` skill)
-- Wallet must have sufficient USDC balance (`npx awal@2.10.0 balance` to check)
+- Must be authenticated (`npx awal@2.10.0 status` to check; see `references/auth.md`)
+- Wallet must have sufficient USDC balance (`npx awal@2.10.0 balance` to check; see `references/fund.md`)
 - Each query costs $0.10 (100000 USDC atomic units)
 
 ## Error Handling
 
-- "Not authenticated" - Run `awal auth login <email>` first, or see `authenticate-wallet` skill
-- "Insufficient balance" - Fund wallet with USDC; see `fund` skill
+- "Not authenticated" - See `references/auth.md`
+- "Insufficient balance" - See `references/fund.md`
 - Query timeout or error - Ensure you are filtering on indexed fields and using a LIMIT

@@ -1,22 +1,8 @@
----
-name: trade
-description: Swap or trade tokens on Base or Polygon. Use when you or the user want to trade, swap, exchange, buy, sell, or convert between tokens like USDC, ETH, and POL. Covers phrases like "buy ETH", "sell ETH for USDC", "convert USDC to ETH", "get some ETH", "buy POL".
-user-invocable: true
-disable-model-invocation: false
-allowed-tools: ["Bash(npx awal@2.10.0 status*)", "Bash(npx awal@2.10.0 trade *)", "Bash(npx awal@2.10.0 balance*)"]
----
-
 # Trading Tokens
 
 Use the `npx awal@2.10.0 trade` command to swap tokens on Base or Polygon via the CDP Swap API. You must be authenticated to trade.
 
-## Confirm wallet is initialized and authed
-
-```bash
-npx awal@2.10.0 status
-```
-
-If the wallet is not authenticated, refer to the `authenticate-wallet` skill.
+If the wallet is not authenticated, see `references/auth.md`.
 
 ## Command Syntax
 
@@ -107,14 +93,14 @@ npx awal@2.10.0 trade '$1' usdc pol --chain polygon
 
 ## Prerequisites
 
-- Must be authenticated (`awal status` to check)
+- Must be authenticated (`npx awal@2.10.0 status` to check; see `references/auth.md`)
 - Wallet must have sufficient balance of the source token
 
 ## Error Handling
 
 Common errors:
 
-- "Not authenticated" - Run `awal auth login <email>` first
+- "Not authenticated" - See `references/auth.md`
 - "Invalid token" - Use a valid alias (usdc, eth, pol) or 0x address
 - "POL only supported on polygon chain" - Use `--chain polygon` when trading POL
 - "Cannot swap a token to itself" - From and to must be different

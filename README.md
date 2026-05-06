@@ -2,18 +2,20 @@
 
 [Agent Skills](https://agentskills.io) for crypto wallet operations. These skills enable AI agents to authenticate, send USDC, trade tokens and more using the [`awal`](https://www.npmjs.com/package/awal) CLI.
 
-## Available Skills
+## What it does
 
-| Skill                                                        | Description                                                    |
-| ------------------------------------------------------------ | -------------------------------------------------------------- |
-| [authenticate-wallet](./skills/authenticate-wallet/SKILL.md) | Sign in to the wallet via email OTP                            |
-| [fund](./skills/fund/SKILL.md)                               | Add money to the wallet via Coinbase Onramp                    |
-| [send-usdc](./skills/send-usdc/SKILL.md)                     | Send USDC to Ethereum addresses or ENS names                   |
-| [trade](./skills/trade/SKILL.md)                             | Swap/trade tokens on Base (USDC, ETH, WETH)                    |
-| [search-for-service](./skills/search-for-service/SKILL.md)   | Search the x402 bazaar for paid API services                   |
-| [pay-for-service](./skills/pay-for-service/SKILL.md)         | Make paid API requests via x402                                |
-| [monetize-service](./skills/monetize-service/SKILL.md)       | Build and deploy a paid API that other agents can use via x402 |
-| [query-onchain-data](./skills/query-onchain-data/SKILL.md)   | Query onchain data on Base using the CDP SQL API via x402      |
+A single skill — [`agentic-wallet`](./skills/agentic-wallet/SKILL.md) — that routes the agent to topic-specific reference docs in [`./skills/agentic-wallet/references/`](./skills/agentic-wallet/references/):
+
+| Capability | Reference |
+| --- | --- |
+| Sign in via email OTP | [`auth.md`](./skills/agentic-wallet/references/auth.md) |
+| Send USDC / ETH / POL / SOL on Base, Polygon, or Solana | [`send-usdc.md`](./skills/agentic-wallet/references/send-usdc.md) |
+| Swap / trade tokens on Base or Polygon | [`trade.md`](./skills/agentic-wallet/references/trade.md) |
+| Add funds via Coinbase Onramp | [`fund.md`](./skills/agentic-wallet/references/fund.md) |
+| Search the x402 bazaar for paid API services | [`x402-search.md`](./skills/agentic-wallet/references/x402-search.md) |
+| Pay an x402 endpoint with automatic USDC payment | [`x402-pay.md`](./skills/agentic-wallet/references/x402-pay.md) |
+| Build and deploy a paid API server (x402) | [`x402-monetize.md`](./skills/agentic-wallet/references/x402-monetize.md) |
+| Query onchain data on Base via the CDP SQL API | [`query-onchain.md`](./skills/agentic-wallet/references/query-onchain.md) |
 
 ## Installation
 
@@ -39,23 +41,24 @@ Send 10 USDC to barmstrong.eth
 
 ## Contributing
 
-To add a new skill:
+To add a new capability:
 
-1. Create a folder in `./skills/` with a lowercase, hyphenated name
-2. Add a `SKILL.md` file with YAML frontmatter and instructions
+1. Create a new markdown file in `./skills/agentic-wallet/references/`
+2. Add a row to the routing table in `./skills/agentic-wallet/SKILL.md` describing when the agent should read it
+3. If the capability needs a new shell tool, add it to `allowed-tools` in `SKILL.md` frontmatter
 
 See the [Agent Skills specification](https://agentskills.io/specification) for the complete format.
 
 ### Updating the `awal` version
 
-All skills pin a specific version of the `awal` CLI. When a new version is published to npm, run:
+The `awal` CLI version is pinned in every code block in `SKILL.md` and the reference docs. When a new version is published to npm, run:
 
 ```bash
 # Make sure you're using Node v22+
 node ./scripts/bump-awal.js
 ```
 
-This fetches the latest version from the npm registry and updates all skill files automatically.
+This fetches the latest version from the npm registry and rewrites every `awal@<version>` reference under `./skills/`.
 
 ## License
 

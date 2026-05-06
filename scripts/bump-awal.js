@@ -6,6 +6,20 @@ const https = require("https");
 
 const skillsDir = join(__dirname, "..", "skills");
 
+// Collect every .md file under skills/ (SKILL.md plus any reference docs).
+function collectMarkdownFiles(dir) {
+  const out = [];
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const full = join(dir, entry.name);
+    if (entry.isDirectory()) {
+      out.push(...collectMarkdownFiles(full));
+    } else if (entry.isFile() && entry.name.endsWith(".md")) {
+      out.push(full);
+    }
+  }
+  return out;
+}
+
 // Fetch latest version from npm registry
 function fetchLatestVersion() {
   return new Promise((resolve, reject) => {
@@ -39,22 +53,16 @@ async function main() {
   let totalReplacements = 0;
   let filesChanged = 0;
 
-  for (const skill of readdirSync(skillsDir, { withFileTypes: true })) {
-    if (!skill.isDirectory()) continue;
-    const filePath = join(skillsDir, skill.name, "SKILL.md");
-    let content;
-    try {
-      content = readFileSync(filePath, "utf-8");
-    } catch {
-      continue;
-    }
+  for (const filePath of collectMarkdownFiles(skillsDir)) {
+    const relPath = filePath.slice(skillsDir.length + 1);
+    const content = readFileSync(filePath, "utf-8");
 
     const matches = content.match(pattern);
     if (!matches) continue;
 
     const alreadyCurrent = matches.every((m) => m === `awal@${latest}`);
     if (alreadyCurrent) {
-      console.log(`  ${skill.name}: already at ${latest}`);
+      console.log(`  ${relPath}: already at ${latest}`);
       continue;
     }
 
@@ -63,11 +71,11 @@ async function main() {
     const count = matches.filter((m) => m !== `awal@${latest}`).length;
     totalReplacements += count;
     filesChanged++;
-    console.log(`  ${skill.name}: updated ${count} references`);
+    console.log(`  ${relPath}: updated ${count} references`);
   }
 
   if (filesChanged === 0) {
-    console.log("\nAll skills already pinned to latest.");
+    console.log("\nAll files already pinned to latest.");
   } else {
     console.log(
       `\nDone. Updated ${totalReplacements} references across ${filesChanged} files.`

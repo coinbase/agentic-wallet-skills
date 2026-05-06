@@ -1,22 +1,8 @@
----
-name: send-usdc
-description: Send tokens (USDC, ETH, POL, or SOL) to an address or ENS name on Base, Polygon, or Solana. Use when you or the user want to send money, pay someone, transfer tokens, tip, donate, or send funds to a wallet address or .eth name. Covers phrases like "send $5 to", "pay 0x...", "transfer to vitalik.eth", or "send USDC on Solana".
-user-invocable: true
-disable-model-invocation: false
-allowed-tools: ["Bash(npx awal@2.10.0 status*)", "Bash(npx awal@2.10.0 send *)", "Bash(npx awal@2.10.0 balance*)"]
----
-
 # Sending Tokens
 
 Use the `npx awal@2.10.0 send` command to transfer tokens from the wallet to any address on Base, Polygon, or Solana.
 
-## Confirm wallet is initialized and authed
-
-```bash
-npx awal@2.10.0 status
-```
-
-If the wallet is not authenticated, refer to the `authenticate-wallet` skill.
+If the wallet is not authenticated, see `references/auth.md`.
 
 ## Command Syntax
 
@@ -85,15 +71,15 @@ ENS names are automatically resolved to addresses via Ethereum mainnet. The comm
 
 ## Prerequisites
 
-- Must be authenticated (`npx awal@2.10.0 status` to check, `npx awal@2.10.0 auth login` to sign in, see skill `authenticate-wallet` for more information)
-- Wallet must have sufficient USDC balance (`npx awal balance` to check)
+- Must be authenticated (`npx awal@2.10.0 status` to check; see `references/auth.md`)
+- Wallet must have sufficient balance (`npx awal@2.10.0 balance` to check; see `references/fund.md` to top up)
 
 ## Error Handling
 
 Common errors:
 
-- "Not authenticated" - Run `awal auth login <email>` first
-- "Insufficient balance" - Check balance with `awal balance`
+- "Not authenticated" - See `references/auth.md`
+- "Insufficient balance" - Check balance with `npx awal@2.10.0 balance`; see `references/fund.md`
 - "Could not resolve ENS name" - Verify the ENS name exists
 - "Invalid recipient" - Must be valid 0x address, ENS name, or Solana Base58 address
 - "SOL only supported on Solana chains" - Use `--chain solana` when sending SOL
