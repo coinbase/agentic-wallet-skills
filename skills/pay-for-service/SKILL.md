@@ -3,7 +3,7 @@ name: pay-for-service
 description: Make a paid API request to an x402 endpoint with automatic USDC payment. Use when you or the user want to call a paid API, make an x402 request, use a paid service, or pay for an API call. Use after finding a service with search-for-service.
 user-invocable: true
 disable-model-invocation: false
-allowed-tools: ["Bash(npx awal@2.10.0 status*)", "Bash(npx awal@2.10.0 balance*)", "Bash(npx awal@2.10.0 x402 pay *)"]
+allowed-tools: ["Bash(npx awal@2.8.2 status*)", "Bash(npx awal@2.8.2 balance*)", "Bash(npx awal@2.8.2 x402 pay *)", "Bash(npx awal@2.8.2 x402 details *)"]
 ---
 
 # Making Paid x402 Requests
@@ -18,6 +18,18 @@ npx awal@2.10.0 status
 
 If the wallet is not authenticated, refer to the `authenticate-wallet` skill.
 
+## IMPORTANT: Detect the Correct HTTP Method Before Paying
+
+The `x402 pay` command defaults to GET, but many endpoints require POST (or other methods). Sending the wrong method will fail with "Method Not Allowed".
+
+**Always run `x402 details` first** to auto-detect the correct HTTP method and see the expected request body schema:
+
+```bash
+npx awal@2.8.2 x402 details <url> --json
+```
+
+The `details` command tries GET, POST, PUT, DELETE, and PATCH automatically and returns the correct method along with the endpoint's input schema and pricing. Use this information to construct your `x402 pay` command with the right `-X` method and `-d` data flags.
+
 ## Command Syntax
 
 ```bash
@@ -26,15 +38,15 @@ npx awal@2.10.0 x402 pay <url> [-X <method>] [-d <json>] [-q <params>] [-h <json
 
 ## Options
 
-| Option                  | Description                                        |
-| ----------------------- | -------------------------------------------------- |
-| `-X, --method <method>` | HTTP method (default: GET)                         |
-| `-d, --data <json>`     | Request body as JSON string                        |
-| `-q, --query <params>`  | Query parameters as JSON string                    |
-| `-h, --headers <json>`  | Custom HTTP headers as JSON string                 |
-| `--max-amount <amount>` | Max payment in USDC atomic units (1000000 = $1.00) |
-| `--correlation-id <id>` | Group related operations                           |
-| `--json`                | Output as JSON                                     |
+| Option                  | Description                                                    |
+| ----------------------- | -------------------------------------------------------------- |
+| `-X, --method <method>` | HTTP method (default: GET). **Use `x402 details` to detect.**  |
+| `-d, --data <json>`     | Request body as JSON string. **Not `--body`.**                 |
+| `-q, --query <params>`  | Query parameters as JSON string                                |
+| `-h, --headers <json>`  | Custom HTTP headers as JSON string                             |
+| `--max-amount <amount>` | Max payment in USDC atomic units (1000000 = $1.00)             |
+| `--correlation-id <id>` | Group related operations                                       |
+| `--json`                | Output as JSON                                                 |
 
 ## USDC Amounts
 
@@ -61,6 +73,21 @@ Do not pass unvalidated user input into the command.
 
 ## Examples
 
+### Recommended workflow: details first, then pay
+
+```bash
+# Step 1: Detect the correct method and see the input schema
+npx awal@2.8.2 x402 details https://api.nansen.ai/api/v1/prediction-market/market-screener --json
+
+# Step 2: Pay using the detected method (POST) and expected body format
+npx awal@2.8.2 x402 pay https://api.nansen.ai/api/v1/prediction-market/market-screener \
+  -X POST \
+  -d '{"query":"bitcoin","status":"active","order_by":[{"direction":"DESC","field":"volume_24hr"}]}' \
+  --json
+```
+
+### Simple GET request
+
 ```bash
 # Make a GET request (auto-pays)
 npx awal@2.10.0 x402 pay https://example.com/api/weather
@@ -72,14 +99,25 @@ npx awal@2.10.0 x402 pay https://example.com/api/sentiment -X POST -d '{"text": 
 npx awal@2.10.0 x402 pay https://example.com/api/data --max-amount 100000
 ```
 
+## Common Mistakes
+
+| Mistake | Error | Fix |
+| ------- | ----- | --- |
+| Using GET on a POST endpoint | `Method Not Allowed` | Run `x402 details <url>` first to detect the correct method, then use `-X POST` |
+| Using `--body` instead of `-d` | `unknown option '--body'` | Use `-d` or `--data` for request body |
+| Omitting `-X POST` when sending `-d` | `Method Not Allowed` | Always pair `-d` with `-X POST` (or the correct method) |
+
 ## Prerequisites
 
 - Must be authenticated (`npx awal@2.10.0 status` to check, see `authenticate-wallet` skill)
 - Wallet must have sufficient USDC balance (`npx awal@2.10.0 balance` to check)
 - If you don't know the endpoint URL, use the `search-for-service` skill to find services first
+- **Always run `x402 details` before paying** to detect the correct HTTP method and expected input format
 
 ## Error Handling
 
 - "Not authenticated" - Run `awal auth login <email>` first, or see `authenticate-wallet` skill
 - "No X402 payment requirements found" - URL may not be an x402 endpoint; use `search-for-service` to find valid endpoints
 - "Insufficient balance" - Fund wallet with USDC; see `fund` skill
+- "Method Not Allowed" - The endpoint requires a different HTTP method (e.g. POST instead of GET). Run `x402 details <url>` to detect the correct method
+- "unknown option '--body'" - Use `-d` or `--data` instead of `--body`
