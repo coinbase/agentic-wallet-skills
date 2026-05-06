@@ -1,9 +1,7 @@
 ---
 name: send-usdc
-description: Send tokens (USDC, ETH, POL, or SOL) to an address or ENS name on Base, Polygon, or Solana. Use when you or the user want to send money, pay someone, transfer tokens, tip, donate, or send funds to a wallet address or .eth name. Covers phrases like "send $5 to", "pay 0x...", "transfer to vitalik.eth", or "send USDC on Solana".
-user-invocable: true
-disable-model-invocation: false
-allowed-tools: ["Bash(npx awal@2.10.0 status*)", "Bash(npx awal@2.10.0 send *)", "Bash(npx awal@2.10.0 balance*)"]
+description: "Send tokens (USDC, ETH, POL, or SOL) to an address or ENS name on Base, Polygon, or Solana. Use when you or the user want to send money, pay someone, transfer tokens, tip, donate, or send funds to a wallet address or .eth name. Covers phrases like send $5 to, pay 0x, transfer to vitalik.eth, or send USDC on Solana."
+allowed-tools: "Bash(npx awal@2.10.0 status*), Bash(npx awal@2.10.0 send *), Bash(npx awal@2.10.0 balance*)"
 ---
 
 # Sending Tokens
