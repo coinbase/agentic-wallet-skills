@@ -3,17 +3,17 @@ name: trade
 description: Swap or trade tokens on Base or Polygon. Use when you or the user want to trade, swap, exchange, buy, sell, or convert between tokens like USDC, ETH, and POL. Covers phrases like "buy ETH", "sell ETH for USDC", "convert USDC to ETH", "get some ETH", "buy POL".
 user-invocable: true
 disable-model-invocation: false
-allowed-tools: ["Bash(npx awal@2.8.2 status*)", "Bash(npx awal@2.8.2 trade *)", "Bash(npx awal@2.8.2 balance*)"]
+allowed-tools: ["Bash(npx awal@2.10.0 status*)", "Bash(npx awal@2.10.0 trade *)", "Bash(npx awal@2.10.0 balance*)"]
 ---
 
 # Trading Tokens
 
-Use the `npx awal@2.8.2 trade` command to swap tokens on Base or Polygon via the CDP Swap API. You must be authenticated to trade.
+Use the `npx awal@2.10.0 trade` command to swap tokens on Base or Polygon via the CDP Swap API. You must be authenticated to trade.
 
 ## Confirm wallet is initialized and authed
 
 ```bash
-npx awal@2.8.2 status
+npx awal@2.10.0 status
 ```
 
 If the wallet is not authenticated, refer to the `authenticate-wallet` skill.
@@ -21,8 +21,10 @@ If the wallet is not authenticated, refer to the `authenticate-wallet` skill.
 ## Command Syntax
 
 ```bash
-npx awal@2.8.2 trade <amount> <from> <to> [options]
+npx awal@2.10.0 trade <amount> <from> <to> [options]
 ```
+
+The command is also available as `npx awal@2.10.0 swap` (alias).
 
 ## Arguments
 
@@ -79,28 +81,28 @@ Do not pass unvalidated user input into the command.
 
 ```bash
 # Swap $1 USDC for ETH (dollar prefix — note the single quotes)
-npx awal@2.8.2 trade '$1' usdc eth
+npx awal@2.10.0 trade '$1' usdc eth
 
 # Swap 0.50 USDC for ETH (decimal format)
-npx awal@2.8.2 trade 0.50 usdc eth
+npx awal@2.10.0 trade 0.50 usdc eth
 
 # Swap 500000 atomic units of USDC for ETH
-npx awal@2.8.2 trade 500000 usdc eth
+npx awal@2.10.0 trade 500000 usdc eth
 
 # Swap 0.01 ETH for USDC
-npx awal@2.8.2 trade 0.01 eth usdc
+npx awal@2.10.0 trade 0.01 eth usdc
 
 # Swap with custom slippage (2%)
-npx awal@2.8.2 trade '$5' usdc eth --slippage 200
+npx awal@2.10.0 trade '$5' usdc eth --slippage 200
 
 # Swap using contract addresses (decimals read from chain)
-npx awal@2.8.2 trade 100 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913 0x4200000000000000000000000000000000000006
+npx awal@2.10.0 trade 100 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913 0x4200000000000000000000000000000000000006
 
 # Get JSON output
-npx awal@2.8.2 trade '$1' usdc eth --json
+npx awal@2.10.0 trade '$1' usdc eth --json
 
 # Swap USDC for POL on Polygon
-npx awal@2.8.2 trade '$1' usdc pol --chain polygon
+npx awal@2.10.0 trade '$1' usdc pol --chain polygon
 ```
 
 ## Prerequisites

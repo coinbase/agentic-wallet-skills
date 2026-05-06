@@ -8,12 +8,12 @@ allowed-tools: ["Bash(npx awal@2.8.2 status*)", "Bash(npx awal@2.8.2 balance*)",
 
 # Making Paid x402 Requests
 
-Use the `npx awal@2.8.2 x402 pay` command to call paid API endpoints with automatic USDC payment on Base.
+Use the `npx awal@2.10.0 x402 pay` command to call paid API endpoints with automatic USDC payment on Base.
 
 ## Confirm wallet is initialized and authed
 
 ```bash
-npx awal@2.8.2 status
+npx awal@2.10.0 status
 ```
 
 If the wallet is not authenticated, refer to the `authenticate-wallet` skill.
@@ -33,7 +33,7 @@ The `details` command tries GET, POST, PUT, DELETE, and PATCH automatically and 
 ## Command Syntax
 
 ```bash
-npx awal@2.8.2 x402 pay <url> [-X <method>] [-d <json>] [-q <params>] [-h <json>] [--max-amount <n>] [--json]
+npx awal@2.10.0 x402 pay <url> [-X <method>] [-d <json>] [-q <params>] [-h <json>] [--max-amount <n>] [--json]
 ```
 
 ## Options
@@ -89,20 +89,14 @@ npx awal@2.8.2 x402 pay https://api.nansen.ai/api/v1/prediction-market/market-sc
 ### Simple GET request
 
 ```bash
-npx awal@2.8.2 x402 pay https://example.com/api/weather
-```
+# Make a GET request (auto-pays)
+npx awal@2.10.0 x402 pay https://example.com/api/weather
 
-### POST request with body
+# Make a POST request with body
+npx awal@2.10.0 x402 pay https://example.com/api/sentiment -X POST -d '{"text": "I love this product"}'
 
-```bash
-# NOTE: Use -d (or --data), NOT --body
-npx awal@2.8.2 x402 pay https://example.com/api/sentiment -X POST -d '{"text": "I love this product"}'
-```
-
-### Limit max payment
-
-```bash
-npx awal@2.8.2 x402 pay https://example.com/api/data --max-amount 100000
+# Limit max payment to $0.10
+npx awal@2.10.0 x402 pay https://example.com/api/data --max-amount 100000
 ```
 
 ## Common Mistakes
@@ -115,8 +109,8 @@ npx awal@2.8.2 x402 pay https://example.com/api/data --max-amount 100000
 
 ## Prerequisites
 
-- Must be authenticated (`npx awal@2.8.2 status` to check, see `authenticate-wallet` skill)
-- Wallet must have sufficient USDC balance (`npx awal@2.8.2 balance` to check)
+- Must be authenticated (`npx awal@2.10.0 status` to check, see `authenticate-wallet` skill)
+- Wallet must have sufficient USDC balance (`npx awal@2.10.0 balance` to check)
 - If you don't know the endpoint URL, use the `search-for-service` skill to find services first
 - **Always run `x402 details` before paying** to detect the correct HTTP method and expected input format
 
