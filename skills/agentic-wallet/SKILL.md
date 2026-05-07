@@ -27,6 +27,7 @@ Pick the reference that matches the task and `Read` it before acting:
 | Task | Reference |
 | --- | --- |
 | Sign in, log in, connect wallet, OTP verification, "not signed in" errors | `references/auth.md` |
+| Check balances, "how much USDC/ETH/POL/SOL do I have", balance per chain, JSON balance output | `references/balance.md` |
 | Send USDC / ETH / POL / SOL to an address or ENS name (Base, Polygon, Solana) | `references/send-usdc.md` |
 | Swap / trade / convert tokens on Base or Polygon | `references/trade.md` |
 | Add funds, top up, onramp, buy USDC | `references/fund.md` |

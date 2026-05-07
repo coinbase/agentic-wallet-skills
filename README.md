@@ -9,6 +9,7 @@ A single skill — [`agentic-wallet`](./skills/agentic-wallet/SKILL.md) — that
 | Capability | Reference |
 | --- | --- |
 | Sign in via email OTP | [`auth.md`](./skills/agentic-wallet/references/auth.md) |
+| Check wallet balances across Base, Polygon, and Solana | [`balance.md`](./skills/agentic-wallet/references/balance.md) |
 | Send USDC / ETH / POL / SOL on Base, Polygon, or Solana | [`send-usdc.md`](./skills/agentic-wallet/references/send-usdc.md) |
 | Swap / trade tokens on Base or Polygon | [`trade.md`](./skills/agentic-wallet/references/trade.md) |
 | Add funds via Coinbase Onramp | [`fund.md`](./skills/agentic-wallet/references/fund.md) |
