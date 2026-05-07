@@ -58,16 +58,37 @@ npx awal@2.10.0 auth verify 123456
 npx awal@2.10.0 status
 ```
 
+## Signing Out
+
+There is **no `awal auth logout` CLI command** today. The agent cannot log the user out programmatically — sign-out must be performed by the human in the wallet companion UI.
+
+When the user asks to log out, sign out, disconnect, or switch accounts:
+
+```bash
+npx awal@2.10.0 show
+```
+
+Then guide the user through the UI:
+
+1. Run `npx awal@2.10.0 show` to bring the wallet companion window to the foreground.
+2. Tell the user to open the wallet menu (settings / profile area in the companion window).
+3. Have the user click **Sign out** (or **Log out**) inside that window.
+4. Confirm the result with `npx awal@2.10.0 status` — once logged out, the status will report the wallet as not authenticated.
+
+After sign-out, the locally cached `flowId` is invalidated. To sign back in, restart the flow with `npx awal@2.10.0 auth login <email>`.
+
+If `npx awal@2.10.0 show` does not bring up a window (e.g. running in a non-graphical environment), let the user know that logout requires the wallet companion UI and is not currently scriptable.
+
 ## Available CLI Commands
 
-| Command                                      | Purpose                                |
-| -------------------------------------------- | -------------------------------------- |
-| `npx awal@2.10.0 status`                     | Check server health and auth status    |
-| `npx awal@2.10.0 auth login <email>`         | Send OTP code to email, returns flowId |
-| `npx awal@2.10.0 auth verify <otp>`          | Complete authentication with OTP code  |
-| `npx awal@2.10.0 balance`                    | Get balances across Base, Polygon, and Solana (use `--chain` for a single chain) |
-| `npx awal@2.10.0 address`                    | Get wallet address                     |
-| `npx awal@2.10.0 show`                       | Open the wallet companion window       |
+| Command                              | Purpose                                                                          |
+| ------------------------------------ | -------------------------------------------------------------------------------- |
+| `npx awal@2.10.0 status`             | Check server health and auth status                                              |
+| `npx awal@2.10.0 auth login <email>` | Send OTP code to email, returns flowId                                           |
+| `npx awal@2.10.0 auth verify <otp>`  | Complete authentication with OTP code                                            |
+| `npx awal@2.10.0 balance`            | Get balances across Base, Polygon, and Solana (use `--chain` for a single chain) |
+| `npx awal@2.10.0 address`            | Get wallet address                                                               |
+| `npx awal@2.10.0 show`               | Open the wallet companion window (also used for sign-out via the UI)             |
 
 ## JSON Output
 
