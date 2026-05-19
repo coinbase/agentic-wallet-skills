@@ -98,7 +98,13 @@ Solana
 ────────────────────────
 USDC    0.00
 SOL     0.00
+
+Tokens from x402 payments
+────────────────────────
+<SYMBOL> (<network>)  <formatted>
 ```
+
+When `--chain` and `--asset` are both omitted, the CLI appends a **Tokens from x402 payments** section listing arbitrary ERC-20 tokens (by symbol and network) seen during prior `x402 pay` calls that still hold a non-zero balance. The section is omitted entirely if no such balances exist, or when filtering by `--chain` or `--asset`.
 
 Amounts are shown in their human-readable form (e.g. `5.00` USDC, `0.0123` ETH), already converted from atomic units.
 

@@ -14,7 +14,7 @@ Authentication uses a two-step email OTP process:
 npx awal@2.10.0 auth login <email>
 ```
 
-This sends a 6-digit verification code to the email and outputs a `flowId`.
+This sends a 6-digit verification code to the email. The `flowId` is saved automatically; it is only printed to stdout when `--json` is passed.
 
 ### Step 2: Verify OTP
 
@@ -49,7 +49,7 @@ npx awal@2.10.0 status
 
 # Start login (sends OTP to email)
 npx awal@2.10.0 auth login user@example.com
-# Output: flowId: abc123...
+# Output: "Verification code sent!" (flowId only printed with --json)
 
 # After user receives code, verify (flow ID saved automatically)
 npx awal@2.10.0 auth verify 123456
