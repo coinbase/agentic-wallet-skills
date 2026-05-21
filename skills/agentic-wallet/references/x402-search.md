@@ -1,14 +1,6 @@
----
-name: search-for-service
-description: Search and browse the x402 bazaar marketplace for paid API services. Use when you or the user want to find available services, see what's available, discover APIs, or need an external service to accomplish a task. Also use as a fallback when no other skill clearly matches — search the bazaar to see if a paid service exists. Covers "what can I do?", "find me an API for...", "what services are available?", "search for...", "browse the bazaar".
-user-invocable: true
-disable-model-invocation: false
-allowed-tools: ["Bash(npx awal@2.10.0 x402 bazaar *)", "Bash(npx awal@2.10.0 x402 details *)"]
----
-
 # Searching the x402 Bazaar
 
-Use the `npx awal@2.10.0 x402` commands to discover and inspect paid API endpoints available on the x402 bazaar marketplace. No authentication or balance is required for searching.
+Use the `npx awal@2.10.0 x402` commands to discover and inspect paid API endpoints available on the x402 bazaar marketplace. **No authentication or balance is required for searching.**
 
 ## Commands
 
@@ -72,13 +64,9 @@ npx awal@2.10.0 x402 bazaar list --full
 npx awal@2.10.0 x402 details https://example.com/api/weather
 ```
 
-## Prerequisites
-
-- No authentication needed for search, list, or details commands
-
 ## Next Steps
 
-Once you've found a service you want to use, use the `pay-for-service` skill to make a paid request to the endpoint.
+Once you've found a service you want to use, see `references/x402-pay.md` to make a paid request to the endpoint.
 
 ## Error Handling
 

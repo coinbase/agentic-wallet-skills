@@ -1,22 +1,8 @@
----
-name: pay-for-service
-description: Make a paid API request to an x402 endpoint with automatic USDC payment. Use when you or the user want to call a paid API, make an x402 request, use a paid service, or pay for an API call. Use after finding a service with search-for-service.
-user-invocable: true
-disable-model-invocation: false
-allowed-tools: ["Bash(npx awal@2.10.0 status*)", "Bash(npx awal@2.10.0 balance*)", "Bash(npx awal@2.10.0 x402 pay *)"]
----
-
 # Making Paid x402 Requests
 
 Use the `npx awal@2.10.0 x402 pay` command to call paid API endpoints with automatic USDC payment on Base.
 
-## Confirm wallet is initialized and authed
-
-```bash
-npx awal@2.10.0 status
-```
-
-If the wallet is not authenticated, refer to the `authenticate-wallet` skill.
+If the wallet is not authenticated, see `references/auth.md`.
 
 ## Command Syntax
 
@@ -74,12 +60,12 @@ npx awal@2.10.0 x402 pay https://example.com/api/data --max-amount 100000
 
 ## Prerequisites
 
-- Must be authenticated (`npx awal@2.10.0 status` to check, see `authenticate-wallet` skill)
-- Wallet must have sufficient USDC balance (`npx awal@2.10.0 balance` to check)
-- If you don't know the endpoint URL, use the `search-for-service` skill to find services first
+- Must be authenticated (`npx awal@2.10.0 status` to check; see `references/auth.md`)
+- Wallet must have sufficient USDC balance (`npx awal@2.10.0 balance` to check; see `references/fund.md` to top up)
+- If you don't know the endpoint URL, see `references/x402-search.md` to find services first
 
 ## Error Handling
 
-- "Not authenticated" - Run `awal auth login <email>` first, or see `authenticate-wallet` skill
-- "No X402 payment requirements found" - URL may not be an x402 endpoint; use `search-for-service` to find valid endpoints
-- "Insufficient balance" - Fund wallet with USDC; see `fund` skill
+- "Not authenticated" - See `references/auth.md`
+- "No X402 payment requirements found" - URL may not be an x402 endpoint; see `references/x402-search.md` to find valid endpoints
+- "Insufficient balance" - See `references/fund.md`
