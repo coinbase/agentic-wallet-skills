@@ -1,4 +1,4 @@
-# GEDX402 integrator worked example
+# GEDX402 integrator worked example 
 
 End-to-end **external payer** flow for [GEDX402](https://gedx402.com) — discover paid hero SKUs, pay with USDC on Base via `awal`, no API keys. Canonical walkthrough: [Integrator quickstart](https://gedx402.com/docs/integrator-quickstart).
 
