@@ -17,6 +17,7 @@ A single skill — [`agentic-wallet`](./skills/agentic-wallet/SKILL.md) — that
 | Pay an x402 endpoint with automatic USDC payment | [`x402-pay.md`](./skills/agentic-wallet/references/x402-pay.md) |
 | Build and deploy a paid API server (x402) | [`x402-monetize.md`](./skills/agentic-wallet/references/x402-monetize.md) |
 | Query onchain data on Base via the CDP SQL API | [`query-onchain.md`](./skills/agentic-wallet/references/query-onchain.md) |
+| GEDX402 integrator worked example (awal external payer) | [`x402-gedx402-integrator.md`](./skills/agentic-wallet/references/x402-gedx402-integrator.md) |
 
 ## Installation
 
