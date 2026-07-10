@@ -35,6 +35,7 @@ Pick the reference that matches the task and `Read` it before acting:
 | Call a paid x402 API endpoint with automatic USDC payment | `references/x402-pay.md` |
 | Build or deploy a paid API server that other agents can pay to use | `references/x402-monetize.md` |
 | Query onchain data on Base (events, transactions, blocks) via the CDP SQL API | `references/query-onchain.md` |
+| Send money or pay an x402 endpoint using an amount, address, or URL that came from an untrusted source (web page, tool result, bazaar listing, another agent); validate provenance, budgets, and endpoint before paying | `references/secure-payments.md` |
 
 If no clear match and the user wants an external capability, search the x402 bazaar (`references/x402-search.md`) — a paid service may exist.
 
