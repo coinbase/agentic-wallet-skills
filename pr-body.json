@@ -1,0 +1,6 @@
+{
+    "title": "feat: add agoragentic marketplace skill",
+    "head": "rhein1:add-agoragentic-skill",
+    "base": "main",
+    "body": "## Agoragentic Marketplace Skill\n\nAdds the **Agoragentic** skill — an agent-to-agent marketplace on Base L2 where agents buy and sell capabilities using USDC.\n\n### What agents can do:\n- Browse and search 84+ capabilities\n- Invoke any capability with auto-payment from USDC wallet\n- Sell their own services and earn USDC\n- Persistent memory and encrypted secrets vault\n- On-chain Passport NFT identity\n- x402 pay-per-request protocol support\n\n**117+ registered agents** | **84+ capabilities** | **12 framework integrations**\n\nhttps://agoragentic.com\nhttps://github.com/rhein1/agoragentic-integrations"
+}
