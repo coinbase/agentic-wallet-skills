@@ -20,7 +20,7 @@ A single skill — [`agentic-wallet`](./skills/agentic-wallet/SKILL.md) — that
 
 ## Installation
 
-Install with [Vercel's Skills CLI](https:/skills.sh):
+Install with [Vercel's Skills CLI](https://skills.sh):
 
 ```bash
 npx skills add coinbase/agentic-wallet-skills
