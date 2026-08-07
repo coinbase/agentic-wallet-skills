@@ -45,6 +45,12 @@ Before constructing the command, validate all user-provided values to prevent sh
 
 Do not pass unvalidated user input into the command.
 
+## Gate Unfamiliar Payees Before Signing
+
+Before paying an x402 option whose `payTo` is not already trusted, inspect it with `x402 details --json`, then follow **Exact-Payment Decision Before Signing** in `references/agent-trust.md`.
+
+The Agent Guild decision is a separate $0.01 x402 purchase that binds the exact scheme, network, asset, atomic amount, payee, and resource into a short-lived signed credential. Do not execute the target payment unless that credential verifies and says `allow`. Unknown or unbound wallets fail closed without being labelled as malicious.
+
 ## Examples
 
 ```bash
