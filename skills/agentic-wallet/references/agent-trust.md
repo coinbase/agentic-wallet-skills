@@ -1,6 +1,6 @@
 # Vetting an AI Agent Before Delegation or Payment
 
-Use Agent Guild as a preflight before delegating work to an unfamiliar AI agent or sending it funds. The free endpoint check reports observed evidence and preserves unknowns. Capability routing is available as a low-cost x402 read, with an optional higher-priced signed artifact for offline verification.
+Use Agent Guild as a preflight before delegating work to an unfamiliar AI agent or signing an x402 payment to an unfamiliar payee. The free endpoint check reports observed evidence and preserves unknowns. Exact-payment and capability decisions are available as low-cost x402 reads, with portable signed artifacts for offline verification.
 
 Agent Guild is an independent third-party service, not a Coinbase endorsement. Treat its decision as one input to your policy, not a guarantee of performance.
 
@@ -23,6 +23,50 @@ curl 'https://agent-guild-5d5r.onrender.com/preflight?url=https%3A%2F%2Fexample.
 ```
 
 Inspect the structured checks individually. Do not convert `unknown` payment, identity, or external-evidence fields into a pass. A reachable endpoint is not proof that the operator is trustworthy.
+
+## Exact-Payment Decision Before Signing
+
+Use this gate immediately before `x402 pay` when the selected Base payee is not already trusted. It buys a separate $0.01 Agent Guild decision; it does not pay the target service.
+
+First inspect the target without paying:
+
+```bash
+npx awal@2.12.1 x402 details 'https://seller.example/api/research' --json
+```
+
+Select exactly one advertised payment option. This flow currently supports only `scheme: exact` on Base mainnet (`eip155:8453`) with an EVM `payTo`. Copy these fields without normalization or substitution:
+
+- `scheme`
+- `network`
+- `asset`
+- atomic-unit `amount`
+- `payTo`
+- `resource.url`
+
+Submit those exact values for a signed decision. Replace each angle-bracket value only with the corresponding field from the `details` response:
+
+```bash
+npx awal@2.12.1 x402 pay 'https://agent-guild-5d5r.onrender.com/wallet-binding/decision' -X POST -d '{"payment":{"scheme":"exact","network":"eip155:8453","asset":"<selected asset>","amount":"<selected atomic amount>","pay_to":"<selected payTo>","resource":"<paymentRequired.resource.url>"},"policy":{"max_risk":32.99,"min_confidence":0.5},"ttl_seconds":300}' --max-amount 10000 --json
+```
+
+Before relying on the response, require all of the following:
+
+1. The credential `type` includes `AgentGuildPaymentDecision` and `credentialSubject.contract` is exactly `AGPD-1/1.0`.
+2. The issuer is the pinned production issuer `did:key:z6MkkSis851QCeP153LUWrxgSKRkSgy91BpUv5geXN7z4P6R` and the `eddsa-jcs-2022` proof verifies.
+3. The credential is currently valid and expires no more than one hour after issuance.
+4. Every `credentialSubject.payment` field exactly matches the selected target option, including payee, atomic amount, and resource.
+5. The effective risk thresholds are at least as strict as those requested.
+6. `credentialSubject.decision` is exactly `allow`.
+
+If any check fails, do not run the target `x402 pay`. A signed `block` for an unknown wallet means there is insufficient wallet-bound evidence; it does not accuse the seller of misconduct.
+
+Verification is free at `POST https://agent-guild-5d5r.onrender.com/wallet-binding/decision/verify`. Official x402 SDK clients can automate the same fail-closed gate with:
+
+```text
+https://agent-guild-5d5r.onrender.com/sdk/integrations/x402_payment_policy.mjs
+```
+
+Register `createAgentGuildX402PaymentPolicy({meteredFetch})` with `client.onBeforePaymentCreation(policy)`. `meteredFetch` must use a separate unguarded x402 client so paying for the policy decision does not recursively invoke itself.
 
 ## Low-Cost Capability Routing
 
