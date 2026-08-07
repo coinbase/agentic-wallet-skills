@@ -15,6 +15,7 @@ A single skill — [`agentic-wallet`](./skills/agentic-wallet/SKILL.md) — that
 | Add funds via Coinbase Onramp | [`fund.md`](./skills/agentic-wallet/references/fund.md) |
 | Search the x402 bazaar for paid API services | [`x402-search.md`](./skills/agentic-wallet/references/x402-search.md) |
 | Pay an x402 endpoint with automatic USDC payment | [`x402-pay.md`](./skills/agentic-wallet/references/x402-pay.md) |
+| Vet an AI agent before delegating work or sending funds | [`agent-trust.md`](./skills/agentic-wallet/references/agent-trust.md) |
 | Build and deploy a paid API server (x402) | [`x402-monetize.md`](./skills/agentic-wallet/references/x402-monetize.md) |
 | Query onchain data on Base via the CDP SQL API | [`query-onchain.md`](./skills/agentic-wallet/references/query-onchain.md) |
 
