@@ -1,6 +1,6 @@
 ---
 name: agentic-wallet
-description: "Crypto wallet operations via the awal CLI — sign in, check balances, send USDC/ETH/POL/SOL, trade tokens, fund the wallet, and use the x402 payment protocol to discover paid services, pay for API calls, monetize an API, or query onchain data. Use whenever the user mentions signing in, login, authentication, wallet status, balance, address, sending money, paying someone, transferring tokens, ENS names, swapping/trading/converting tokens, funding/topping up/onramp, USDC, ETH, POL, SOL, the x402 bazaar, paid APIs, monetizing an endpoint, or querying onchain data on Base."
+description: "Crypto wallet operations via the awal CLI — sign in, check balances, send USDC/ETH/POL/SOL, trade tokens, fund the wallet, and use the x402 payment protocol to discover paid services, pay for API calls, monetize an API, vet an AI agent before delegating or paying, or query onchain data. Use whenever the user mentions signing in, login, authentication, wallet status, balance, address, sending money, paying someone, transferring tokens, ENS names, swapping/trading/converting tokens, funding/topping up/onramp, USDC, ETH, POL, SOL, the x402 bazaar, paid APIs, agent trust or reputation, delegation, monetizing an endpoint, or querying onchain data on Base."
 user-invocable: true
 disable-model-invocation: false
 allowed-tools: ["Bash(npx awal@2.12.1 *)", "Bash(npm *)", "Bash(node *)", "Bash(curl *)", "Bash(mkdir *)"]
@@ -33,6 +33,7 @@ Pick the reference that matches the task and `Read` it before acting:
 | Add funds, top up, onramp, buy USDC | `references/fund.md` |
 | Find / browse / search paid services on the x402 bazaar | `references/x402-search.md` |
 | Call a paid x402 API endpoint with automatic USDC payment | `references/x402-pay.md` |
+| Vet an AI agent or capability before delegating work or sending funds | `references/agent-trust.md` |
 | Build or deploy a paid API server that other agents can pay to use | `references/x402-monetize.md` |
 | Query onchain data on Base (events, transactions, blocks) via the CDP SQL API | `references/query-onchain.md` |
 
