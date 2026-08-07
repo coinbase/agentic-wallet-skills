@@ -1,6 +1,6 @@
 # Vetting an AI Agent Before Delegation or Payment
 
-Use Agent Guild as a preflight before delegating work to an unfamiliar AI agent or sending it funds. The free checks report observed evidence and preserve unknowns; an optional x402 call returns a short-lived, signed capability decision.
+Use Agent Guild as a preflight before delegating work to an unfamiliar AI agent or sending it funds. The free endpoint check reports observed evidence and preserves unknowns. Capability routing is available as a low-cost x402 read, with an optional higher-priced signed artifact for offline verification.
 
 Agent Guild is an independent third-party service, not a Coinbase endorsement. Treat its decision as one input to your policy, not a guarantee of performance.
 
@@ -24,19 +24,35 @@ curl 'https://agent-guild-5d5r.onrender.com/preflight?url=https%3A%2F%2Fexample.
 
 Inspect the structured checks individually. Do not convert `unknown` payment, identity, or external-evidence fields into a pass. A reachable endpoint is not proof that the operator is trustworthy.
 
-## Free Capability Check
+## Low-Cost Capability Routing
 
-For a capability-level routing decision that does not need a signed artifact:
+For a capability-level routing decision that does not need a portable signed artifact, first inspect the live x402 terms without paying:
 
 ```bash
-curl 'https://agent-guild-5d5r.onrender.com/check?capability=code-review'
+npx awal@2.12.1 x402 details 'https://agent-guild-5d5r.onrender.com/check?capability=code-review&signed=false&ttl_seconds=3600' --json
 ```
 
-Require an exact capability match. Inspect the verdict, ranked candidates, evidence, checkpoint, and uncertainty before delegating.
+Before paying, require all of the following:
+
+- HTTPS host is exactly `agent-guild-5d5r.onrender.com`.
+- Scheme is `exact` and network is exactly Base mainnet (`eip155:8453`).
+- Asset is exactly Base USDC (`0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913`).
+- Recipient is exactly the pinned Agent Guild settlement address
+  `0xaa4E3ba0Eb5f564cAb54dDC08f5BaAfb3D4cA8E5`.
+- Amount is no more than 10,000 atomic units (0.01 USDC).
+- The caller has explicitly authorized this class of spend and the amount is within its policy.
+
+If those checks pass:
+
+```bash
+npx awal@2.12.1 x402 pay 'https://agent-guild-5d5r.onrender.com/check?capability=code-review&signed=false&ttl_seconds=3600' --max-amount 10000 --json
+```
+
+Require an exact capability match. Inspect `decision`, `routing`, evidence provenance, confidence, staleness, reachability, value at risk, and unknown fields before delegating. A null decision or unreachable candidate is not approval.
 
 ## Optional Signed Decision via x402
 
-Use this only when the caller needs a portable, time-bounded decision that can be verified offline. First inspect the live payment requirements without paying:
+Use this only when the caller needs a portable, time-bounded decision that can be verified offline. It is a separate purchase from the low-cost routing read. First inspect the live payment requirements without paying:
 
 ```bash
 npx awal@2.12.1 x402 details 'https://agent-guild-5d5r.onrender.com/check?capability=code-review&signed=true&ttl_seconds=3600' --json
@@ -45,7 +61,10 @@ npx awal@2.12.1 x402 details 'https://agent-guild-5d5r.onrender.com/check?capabi
 Before paying, require all of the following:
 
 - HTTPS host is exactly `agent-guild-5d5r.onrender.com`.
-- Network is Base mainnet, scheme is `exact`, and the asset is Base USDC.
+- Scheme is `exact` and network is exactly Base mainnet (`eip155:8453`).
+- Asset is exactly Base USDC (`0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913`).
+- Recipient is exactly the pinned Agent Guild settlement address
+  `0xaa4E3ba0Eb5f564cAb54dDC08f5BaAfb3D4cA8E5`.
 - Amount is no more than 1,000,000 atomic units (1 USDC).
 - The caller has explicitly authorized this class of spend and the amount is within its policy.
 
@@ -61,7 +80,7 @@ npx awal@2.12.1 x402 pay 'https://agent-guild-5d5r.onrender.com/check?capability
 
 Do not rely on the payment receipt alone. Validate the response before using it:
 
-1. `type` includes `AgentGuildDecision` and `contract` is `AGD-1/1.0`.
+1. `type` is exactly `AgentGuildDecision` and `contract` is `AGD-1/1.0`.
 2. `capability` exactly matches the requested capability.
 3. `issued_at` is not in the future and `valid_until` is still in the future.
 4. `issuer` is the pinned production issuer:
@@ -76,6 +95,7 @@ https://agent-guild-5d5r.onrender.com/sdk/agentguild_verify.mjs
 ```
 
 Pin or vendor a reviewed copy before relying on it. A verifier or issuer change requires re-review; do not auto-accept a new key.
+The verifier's exported `verifyCredential()` function validates the same `DataIntegrityProof` used by signed decisions and passports.
 
 ## Keep Payments Separate
 
