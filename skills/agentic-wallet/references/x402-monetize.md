@@ -102,7 +102,7 @@ Created with a facilitator client. Register payment schemes and extensions befor
 const { x402ResourceServer, HTTPFacilitatorClient } = require("@x402/core/server");
 const { ExactEvmScheme } = require("@x402/evm/exact/server");
 
-const facilitator = new HTTPFacilitatorClient({ url: "https://x402.org" });
+const facilitator = new HTTPFacilitatorClient({ url: "https://x402.org/facilitator" });
 const server = new x402ResourceServer(facilitator);
 server.register("eip155:8453", new ExactEvmScheme());
 ```
