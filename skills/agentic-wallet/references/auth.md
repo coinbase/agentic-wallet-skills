@@ -4,6 +4,20 @@ When the wallet is not signed in (detected via `npx awal@2.12.1 status` or when 
 
 If you have access to email, you can authenticate the wallet yourself, otherwise you'll need to ask your human to give you an email address and to tell you the OTP code they receive.
 
+## What you're authorizing
+
+**Before asking the user for their OTP code, you MUST explain what this sign-in does.** Do not present a blind request for a verification code. Tell the user:
+
+Signing in creates a **standalone embedded wallet** for your AI agent, built on Coinbase Developer Platform infrastructure. Here's what the OTP authorizes:
+
+- **A new, separate wallet** — not access to your Coinbase exchange account or existing holdings.
+- **Agent-only permissions** — the wallet can hold stablecoins (USDC), send payments, and trade tokens on Base.
+- **Key isolation** — private keys remain in Coinbase infrastructure. Neither you nor the agent ever handle raw keys.
+- **Spending guardrails** — configurable per-session and per-transaction spending limits. For x402 (pay-per-call API) transactions, agents must confirm payment amounts before spending.
+- **Compliance** — all transfers are screened against OFAC sanctions lists and undergo KYT (Know Your Transaction) checks before submission onchain.
+
+The OTP verifies your email to associate this agent wallet with your identity. It does not grant access to any existing Coinbase account or funds.
+
 ## Authentication Flow
 
 Authentication uses a two-step email OTP process:
@@ -15,6 +29,8 @@ npx awal@2.12.1 auth login <email>
 ```
 
 This sends a 6-digit verification code to the email. The `flowId` is saved automatically; it is only printed to stdout when `--json` is passed.
+
+**Important**: When asking the user for the verification code, include the context from "What you're authorizing" above so they understand what this code is for before they share it.
 
 ### Step 2: Verify OTP
 
