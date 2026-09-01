@@ -58,6 +58,41 @@ npx awal@2.12.1 x402 pay https://example.com/api/sentiment -X POST -d '{"text": 
 npx awal@2.12.1 x402 pay https://example.com/api/data --max-amount 100000
 ```
 
+## Async and Long-Running APIs
+
+A paid request may return `202 Accepted` with a job ID or polling URL instead
+of the final artifact. In that flow, the payment purchased the job submission;
+the polling endpoint normally reports progress without another payment.
+
+1. Keep the complete paid response, including the job ID, polling URL, and any
+   recommended polling interval or `Retry-After` value.
+2. Validate a returned polling URL with the same rules as the original URL.
+   Prefer the original HTTPS origin. If it points to another host, stop and
+   confirm that the provider documentation names that host.
+3. Poll the status URL with ordinary `curl`, not another `x402 pay` call. Obey
+   the provider's interval and cap both attempts and total wait time.
+4. Stop when the provider reports a terminal state such as `completed` or
+   `failed`. Return the final artifact only after completion.
+
+```bash
+# The paid POST returns 202 with a pollUrl in its JSON response.
+npx awal@2.12.1 x402 pay https://example.com/api/render \
+  -X POST \
+  -d '{"prompt":"product demo"}' \
+  --max-amount 100000 \
+  --json
+
+# Poll the validated status URL without paying again.
+curl -fsS https://example.com/api/render/job_123
+```
+
+Never replay a paid POST merely to check progress; that can create and charge
+for a second job. If a status endpoint itself returns 402, stop and treat it as
+a new paid call. If the original request times out after payment may have been
+submitted, treat the result as unknown: look up the job by its returned ID,
+correlation ID, or a provider-supported idempotency key before considering a
+retry.
+
 ## Prerequisites
 
 - Must be authenticated (`npx awal@2.12.1 status` to check; see `references/auth.md`)
@@ -69,3 +104,4 @@ npx awal@2.12.1 x402 pay https://example.com/api/data --max-amount 100000
 - "Not authenticated" - See `references/auth.md`
 - "No X402 payment requirements found" - URL may not be an x402 endpoint; see `references/x402-search.md` to find valid endpoints
 - "Insufficient balance" - See `references/fund.md`
+- `202 Accepted` - Follow the async guidance above; do not pay the trigger endpoint again to poll status
