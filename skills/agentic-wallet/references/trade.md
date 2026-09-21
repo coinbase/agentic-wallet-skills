@@ -57,9 +57,9 @@ The amount can be specified in multiple formats:
 
 Before constructing the command, validate all user-provided values to prevent shell injection:
 
-- **amount**: Must match `^\$?[\d.]+$` (digits, optional decimal point, optional `$` prefix). Reject if it contains spaces, semicolons, pipes, backticks, or other shell metacharacters.
+- **amount**: Must match `^\$?\d+(\.\d+)?$` (a valid decimal number with an optional single decimal point and optional `$` prefix). Reject anything else, including values with multiple decimal points, spaces, semicolons, pipes, backticks, or other shell metacharacters. When the intended unit (whole tokens vs. atomic units) is ambiguous for a plain integer, confirm with the user before swapping.
 - **from / to**: Must be a known alias (`usdc`, `eth`, `pol`) or a valid `0x` hex address (`^0x[0-9a-fA-F]{40}$`). Reject any other value.
-- **slippage**: Must be a positive integer (`^\d+$`).
+- **slippage**: Must be a positive integer (`^\d+$`). Reject values above `1000` (10% in basis points) unless the user explicitly confirms the higher tolerance — a large slippage tolerance exposes the swap to sandwich attacks and value loss.
 
 Do not pass unvalidated user input into the command.
 

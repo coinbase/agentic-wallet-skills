@@ -1,6 +1,9 @@
 {
   "name": "agentic-wallet-skills",
   "private": true,
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "bump-awal": "node scripts/bump-awal.js"
   }

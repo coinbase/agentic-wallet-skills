@@ -16,7 +16,7 @@ npx awal@2.12.1 x402 pay https://x402.cdp.coinbase.com/platform/v2/data/query/ru
 
 Before constructing the command, validate inputs to prevent shell injection:
 
-- **SQL query**: Always embed the query inside a single-quoted JSON string (`-d '{"sql": "..."}'`). Never use double quotes for the outer `-d` wrapper, as this enables shell expansion of `$` and backticks within the query.
+- **SQL query**: Always embed the query inside a single-quoted JSON string (`-d '{"sql": "..."}'`). Never use double quotes for the outer `-d` wrapper, as this enables shell expansion of `$` and backticks within the query. If the SQL itself contains a single quote (e.g. a string literal), escape it as `'\''` — see the examples below. An unescaped single quote terminates the shell quoting and allows the rest of the string to be executed as a shell command, so never interpolate raw user text into the `-d` argument without this escaping.
 - **Addresses**: Must be valid `0x` hex addresses (`^0x[0-9a-fA-F]{40}$`). Reject any value containing shell metacharacters.
 
 Do not pass unvalidated user input into the command.

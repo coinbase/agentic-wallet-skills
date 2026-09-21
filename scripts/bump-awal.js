@@ -20,19 +20,60 @@ function collectMarkdownFiles(dir) {
   return out;
 }
 
-// Fetch latest version from npm registry
+// Fetch the latest version from the npm registry and validate its shape before
+// it is used to rewrite pinned references in the skill markdown files.
 function fetchLatestVersion() {
   return new Promise((resolve, reject) => {
-    https
+    const request = https
       .get(
         "https://registry.npmjs.org/awal/latest",
         { headers: { Accept: "application/json" } },
         (res) => {
+          // Fail fast on non-2xx responses instead of attempting to parse an
+          // error page as JSON.
+          if (!res.statusCode || res.statusCode < 200 || res.statusCode >= 300) {
+            res.resume(); // Drain the body so the socket is released.
+            reject(
+              new Error(
+                `npm registry returned HTTP ${res.statusCode} for awal/latest`
+              )
+            );
+            return;
+          }
+          res.setEncoding("utf-8");
           let data = "";
-          res.on("data", (chunk) => (data += chunk));
+          // Bound the buffered response so a hostile or malformed response
+          // cannot exhaust memory before it is parsed.
+          const maxResponseBytes = 64 * 1024;
+          res.on("data", (chunk) => {
+            data += chunk;
+            if (data.length > maxResponseBytes) {
+              request.destroy(
+                new Error("npm registry response exceeded 64 KiB")
+              );
+            }
+          });
           res.on("end", () => {
             try {
-              resolve(JSON.parse(data).version);
+              const version = JSON.parse(data).version;
+              // Only accept a well-formed semver string. The fetched version is
+              // interpolated into markdown files, so any value containing
+              // unexpected characters must be rejected before files are
+              // written.
+              if (
+                typeof version !== "string" ||
+                !/^\d+\.\d+\.\d+(?:-[\w.-]+)?$/.test(version)
+              ) {
+                reject(
+                  new Error(
+                    `npm registry returned an unexpected version value: ${JSON.stringify(
+                      version
+                    )}`
+                  )
+                );
+                return;
+              }
+              resolve(version);
             } catch (e) {
               reject(
                 new Error(`Failed to parse npm registry response: ${e.message}`)
@@ -42,6 +83,10 @@ function fetchLatestVersion() {
         }
       )
       .on("error", reject);
+    // Abort requests that hang so the script cannot block indefinitely.
+    request.setTimeout(15000, () => {
+      request.destroy(new Error("npm registry request timed out after 15s"));
+    });
   });
 }
 
@@ -84,6 +129,9 @@ async function main() {
 }
 
 main().catch((e) => {
-  console.error(e.message);
+  // Print the message of real Error objects and fall back to String() so a
+  // non-Error rejection still produces a readable failure instead of
+  // "undefined".
+  console.error(e instanceof Error ? e.message : String(e));
   process.exit(1);
 });

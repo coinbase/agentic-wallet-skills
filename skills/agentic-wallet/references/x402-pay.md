@@ -39,9 +39,9 @@ X402 uses USDC atomic units (6 decimals):
 
 Before constructing the command, validate all user-provided values to prevent shell injection:
 
-- **url**: Must be a valid URL starting with `https://` or `http://`. Reject if it contains spaces, semicolons, pipes, backticks, or shell metacharacters.
+- **url**: Must be a valid URL starting with `https://`. Only use `http://` for endpoints you are testing locally (e.g. `http://localhost:3000/...`) — payment headers sent to a remote `http://` endpoint travel in cleartext. Reject if it contains spaces, semicolons, pipes, backticks, or shell metacharacters.
 - **data (-d)**: Must be valid JSON. Always wrap in single quotes to prevent shell expansion.
-- **max-amount**: Must be a positive integer (`^\d+$`).
+- **max-amount**: Must be a positive integer (`^\d+$`). Always pass `--max-amount` on every paid request: it caps the payment the endpoint can demand. Never pay an endpoint whose required amount exceeds the value the user authorized, and confirm with the user before paying any endpoint whose price is materially higher than expected.
 
 Do not pass unvalidated user input into the command.
 

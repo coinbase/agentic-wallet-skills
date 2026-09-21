@@ -1,2 +1,4 @@
 .claude
 .agents
+node_modules
+.env

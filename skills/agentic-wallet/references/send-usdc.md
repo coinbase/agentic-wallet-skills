@@ -14,7 +14,7 @@ npx awal@2.12.1 send <amount> <recipient> [--chain <chain>] [--asset <asset>] [-
 
 | Argument    | Description                                                                                                                                                                                                                          |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `amount`    | Amount to send: '$1.00', '1.00', or atomic units (1000000 = $1). Always single-quote amounts that use `$` to prevent bash variable expansion. If the number looks like atomic units (no decimal or > 100), treat as atomic units. Assume that people won't be sending more than 100 USDC the majority of the time |
+| `amount`    | Amount to send: '$1.00', '1.00', or atomic units (1000000 = $1). Always single-quote amounts that use `$` to prevent bash variable expansion. The CLI auto-detects units: a plain integer with no decimal point is treated as atomic units when it is large (e.g. `500000` = $0.50 USDC) and as whole tokens when small — this heuristic is ambiguous, so when the intended amount or unit is not clearly stated by the user, confirm the exact amount and unit with the user before executing. Always ask the user to confirm amounts above 100 USDC before sending. |
 | `recipient` | Ethereum address (0x...), ENS name (vitalik.eth), or Solana address (Base58)                                                                                                                                                         |
 
 ## Options
@@ -29,7 +29,7 @@ npx awal@2.12.1 send <amount> <recipient> [--chain <chain>] [--asset <asset>] [-
 
 Before constructing the command, validate all user-provided values to prevent shell injection:
 
-- **amount**: Must match `^\$?[\d.]+$` (digits, optional decimal point, optional `$` prefix). Reject if it contains spaces, semicolons, pipes, backticks, or other shell metacharacters.
+- **amount**: Must match `^\$?\d+(\.\d+)?$` (a valid decimal number with an optional single decimal point and optional `$` prefix). Reject anything else, including values with multiple decimal points, spaces, semicolons, pipes, backticks, or other shell metacharacters.
 - **recipient**: Must be a valid `0x` hex address (`^0x[0-9a-fA-F]{40}$`), an ENS name (`^[a-zA-Z0-9.-]+\.eth$`), or a Solana address (`^[1-9A-HJ-NP-Za-km-z]{32,44}$`). Reject any value containing spaces or shell metacharacters.
 - **chain**: Must be one of `base`, `polygon`, `solana`. Reject any other value.
 - **asset**: Must be one of `usdc`, `eth`, `pol`, `sol`. Reject any other value.

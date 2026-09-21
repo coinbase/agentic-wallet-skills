@@ -28,8 +28,13 @@ Use the 6-digit code from the user's email to complete authentication. The flow 
 
 Before constructing the command, validate all user-provided values to prevent shell injection:
 
-- **email**: Must match a standard email format (`^[^\s;|&`]+@[^\s;|&`]+$`). Reject if it contains spaces, semicolons, pipes, backticks, or other shell metacharacters.
-- **otp**: Must be exactly 6 digits (`^\d{6}$`).
+- **email**: Must match a standard email format (see the regex below). Reject if it contains spaces, semicolons, pipes, backticks, or other shell metacharacters.
+- **otp**: Must be exactly 6 digits.
+
+```text
+email regex: ^[^\s;|&`]+@[^\s;|&`]+$
+otp regex:   ^\d{6}$
+```
 
 Do not pass unvalidated user input into the command.
 
