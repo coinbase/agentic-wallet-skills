@@ -33,6 +33,7 @@ Pick the reference that matches the task and `Read` it before acting:
 | Add funds, top up, onramp, buy USDC | `references/fund.md` |
 | Find / browse / search paid services on the x402 bazaar | `references/x402-search.md` |
 | Call a paid x402 API endpoint with automatic USDC payment | `references/x402-pay.md` |
+| Preflight CSV before import, ETL, spreadsheet ingestion, or migration | `references/csv-preflight.md` |
 | Build or deploy a paid API server that other agents can pay to use | `references/x402-monetize.md` |
 | Query onchain data on Base (events, transactions, blocks) via the CDP SQL API | `references/query-onchain.md` |
 
