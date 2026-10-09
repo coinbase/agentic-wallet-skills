@@ -8,7 +8,7 @@ Before `x402 pay` (see `references/x402-pay.md`) on any endpoint you have not pa
 
 ## Input Validation
 
-- URL: must match `^https://[^\s;|&$`'"]+$`
+- URL: must match `` ^https://[^\s;|&$`'"]+$ ``
 - payTo (EVM): `^0x[0-9a-fA-F]{40}$`; payTo (Solana): `^[1-9A-HJ-NP-Za-km-z]{32,44}$`
 - network: `^[a-z0-9:-]+$`
 
