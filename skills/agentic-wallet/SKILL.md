@@ -1,6 +1,6 @@
 ---
 name: agentic-wallet
-description: "Crypto wallet operations via the awal CLI — sign in, check balances, send USDC/ETH/POL/SOL, trade tokens, fund the wallet, and use the x402 payment protocol to discover paid services, pay for API calls, monetize an API, or query onchain data. Use whenever the user mentions signing in, login, authentication, wallet status, balance, address, sending money, paying someone, transferring tokens, ENS names, swapping/trading/converting tokens, funding/topping up/onramp, USDC, ETH, POL, SOL, the x402 bazaar, paid APIs, monetizing an endpoint, or querying onchain data on Base."
+description: "Crypto wallet operations via the awal CLI, plus an optional independent AssetFare read-only cross-chain quote comparison — sign in, check balances, send USDC/ETH/POL/SOL, trade tokens, fund the wallet, discover and pay for x402 services, monetize an API, or query onchain data on Base. Use whenever the user mentions login/authentication, wallet status/balance/address, sending money, transferring tokens, ENS names, swapping/trading/converting, ordinary funding/onramp, USDC/ETH/POL/SOL, the x402 bazaar, paid APIs, monetizing an endpoint, querying onchain data, or explicitly comparing—but never executing—a Solana↔Base bridge, rebalance, or Base-USDC funding route."
 user-invocable: true
 disable-model-invocation: false
 allowed-tools: ["Bash(npx awal@2.12.1 *)", "Bash(npm *)", "Bash(node *)", "Bash(curl *)", "Bash(mkdir *)"]
@@ -12,7 +12,9 @@ Operate a crypto wallet through the `awal` CLI. This skill is a router: read the
 
 ## Preflight: Confirm wallet state
 
-Before any wallet operation that requires authentication (everything except x402 search/details), check status:
+Before any wallet operation that requires authentication (everything except x402
+search/details and the independent read-only AssetFare quote comparison), check
+status:
 
 ```bash
 npx awal@2.12.1 status
@@ -30,7 +32,8 @@ Pick the reference that matches the task and `Read` it before acting:
 | Check balances, "how much USDC/ETH/POL/SOL do I have", balance per chain, JSON balance output | `references/balance.md` |
 | Send USDC / ETH / POL / SOL to an address or ENS name (Base, Polygon, Solana) | `references/send-usdc.md` |
 | Swap / trade / convert tokens on Base or Polygon | `references/trade.md` |
-| Add funds, top up, onramp, buy USDC | `references/fund.md` |
+| Add funds by onramp/card/bank/Coinbase or receive a direct transfer (default funding path) | `references/fund.md` |
+| Quote—but never auto-execute—a currently offered AssetFare route; discover the live 65-route curated catalog, validate the unranked `continuation_v3`, make no cheapest-route claim, and mention the separate caller-owned `assetfare-mcp@1.21.6` path only after explicit approval | `references/crosschain-funding-quote.md` |
 | Find / browse / search paid services on the x402 bazaar | `references/x402-search.md` |
 | Call a paid x402 API endpoint with automatic USDC payment | `references/x402-pay.md` |
 | Build or deploy a paid API server that other agents can pay to use | `references/x402-monetize.md` |

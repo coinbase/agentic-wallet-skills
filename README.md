@@ -2,6 +2,13 @@
 
 [Agent Skills](https://agentskills.io) for crypto wallet operations. These skills enable AI agents to authenticate, send USDC, trade tokens and more using the [`awal`](https://www.npmjs.com/package/awal) CLI.
 
+The optional cross-chain funding comparison is the sole exception: it calls the
+independent third-party AssetFare public API directly for a read-only quote,
+validates its unranked `continuation_v3`, and explains—but never performs—the
+local explicit selection → exact v3 bounds/mode → exactly-one-path sequence. It
+is not an `awal` capability or a Coinbase affiliation/endorsement, and it never
+executes a bridge, swap, signature, or transaction.
+
 ## What it does
 
 A single skill — [`agentic-wallet`](./skills/agentic-wallet/SKILL.md) — that routes the agent to topic-specific reference docs in [`./skills/agentic-wallet/references/`](./skills/agentic-wallet/references/):
@@ -13,6 +20,7 @@ A single skill — [`agentic-wallet`](./skills/agentic-wallet/SKILL.md) — that
 | Send USDC / ETH / POL / SOL on Base, Polygon, or Solana | [`send-usdc.md`](./skills/agentic-wallet/references/send-usdc.md) |
 | Swap / trade tokens on Base or Polygon | [`trade.md`](./skills/agentic-wallet/references/trade.md) |
 | Add funds via Coinbase Onramp | [`fund.md`](./skills/agentic-wallet/references/fund.md) |
+| Compare an optional third-party AssetFare Solana↔Base aggregate funding route read-only, then explain the separate caller-owned unsigned-plan path only after explicit approval | [`crosschain-funding-quote.md`](./skills/agentic-wallet/references/crosschain-funding-quote.md) |
 | Search the x402 bazaar for paid API services | [`x402-search.md`](./skills/agentic-wallet/references/x402-search.md) |
 | Pay an x402 endpoint with automatic USDC payment | [`x402-pay.md`](./skills/agentic-wallet/references/x402-pay.md) |
 | Build and deploy a paid API server (x402) | [`x402-monetize.md`](./skills/agentic-wallet/references/x402-monetize.md) |
