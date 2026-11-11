@@ -1,65 +1,31 @@
 ---
 name: agentic-wallet
-description: "Crypto wallet operations via the awal CLI — sign in, check balances, send USDC/ETH/POL/SOL, trade tokens, fund the wallet, and use the x402 payment protocol to discover paid services, pay for API calls, monetize an API, or query onchain data. Use whenever the user mentions signing in, login, authentication, wallet status, balance, address, sending money, paying someone, transferring tokens, ENS names, swapping/trading/converting tokens, funding/topping up/onramp, USDC, ETH, POL, SOL, the x402 bazaar, paid APIs, monetizing an endpoint, or querying onchain data on Base."
+description: >-
+  Deprecated Agentic Wallet entry point. Redirect wallet sign-in, balance, address,
+  sending, token transfers, swaps, funding, onchain data, and x402 paid-service
+  requests to Coinbase Wallet MCP via coinbase.com/skill.md instead of the awal CLI.
 user-invocable: true
 disable-model-invocation: false
-allowed-tools: ["Bash(npx awal@2.12.1 *)", "Bash(npm *)", "Bash(node *)", "Bash(curl *)", "Bash(mkdir *)"]
 ---
 
-# Agentic Wallet
+# Agentic Wallet — deprecated
 
-Operate a crypto wallet through the `awal` CLI. This skill is a router: read the relevant reference file in `references/` for the task at hand.
+Agentic Wallet (`awal`) and Payments MCP are being retired in favor of Coinbase Wallet MCP.
+Do not install or run the old CLI for new tasks, and do not route to the legacy reference
+files in this skill.
 
-## Preflight: Confirm wallet state
+1. Fetch and follow [coinbase.com/skill.md](https://www.coinbase.com/skill.md). For this
+   agent-wallet workflow, explicitly choose **Coinbase Wallet MCP**, not Coinbase MCP
+   (account trading).
+2. Follow its maintained [Wallet MCP guide](https://docs.cdp.coinbase.com/coinbase-for-agents/wallet-mcp/skill.md)
+   for host-specific setup, Coinbase Wallet OAuth, required onboarding, and approvals.
+   The remote server is `https://wallet-mcp.coinbase.com`; shell access alone is not a connection.
+3. Verify that Wallet MCP tools are callable before attempting a wallet operation. Use the live
+   tool descriptions for supported actions and networks. If the guide cannot be fetched or the
+   connection is unavailable, explain the blocker and stop; do not fall back to the old CLI.
 
-Before any wallet operation that requires authentication (everything except x402 search/details), check status:
-
-```bash
-npx awal@2.12.1 status
-```
-
-If the wallet is not authenticated, read `references/auth.md` and complete sign-in first.
-
-## Routing
-
-Pick the reference that matches the task and `Read` it before acting:
-
-| Task | Reference |
-| --- | --- |
-| Sign in, log in, connect wallet, OTP verification, "not signed in" errors | `references/auth.md` |
-| Check balances, "how much USDC/ETH/POL/SOL do I have", balance per chain, JSON balance output | `references/balance.md` |
-| Send USDC / ETH / POL / SOL to an address or ENS name (Base, Polygon, Solana) | `references/send-usdc.md` |
-| Swap / trade / convert tokens on Base or Polygon | `references/trade.md` |
-| Add funds, top up, onramp, buy USDC | `references/fund.md` |
-| Find / browse / search paid services on the x402 bazaar | `references/x402-search.md` |
-| Call a paid x402 API endpoint with automatic USDC payment | `references/x402-pay.md` |
-| Build or deploy a paid API server that other agents can pay to use | `references/x402-monetize.md` |
-| Query onchain data on Base (events, transactions, blocks) via the CDP SQL API | `references/query-onchain.md` |
-
-If no clear match and the user wants an external capability, search the x402 bazaar (`references/x402-search.md`) — a paid service may exist.
-
-## Shared rules
-
-- **Input validation**: every reference lists the regexes / allowlists that user-provided values must match before being placed in a shell command. Validate strictly; reject inputs containing spaces, semicolons, pipes, backticks, or other shell metacharacters. Do not pass unvalidated user input into commands.
-- **Single-quote `$` amounts**: any amount written as `'$1.00'` must be single-quoted to prevent bash variable expansion.
-- **JSON output**: every `awal` command supports `--json` for machine-readable output.
-- **Auth errors mean re-auth**: if any command fails with "Not authenticated" or similar, read `references/auth.md` and run the sign-in flow.
-- **Insufficient balance**: read `references/fund.md` to top up.
-
-## Quick command index
-
-| Command | Purpose |
-| --- | --- |
-| `npx awal@2.12.1 status` | Server health + auth status |
-| `npx awal@2.12.1 address` | Get wallet address |
-| `npx awal@2.12.1 balance` | Get balances across Base, Polygon, Solana (use `--chain` for one chain) |
-| `npx awal@2.12.1 show` | Open the wallet companion window (used for funding) |
-| `npx awal@2.12.1 auth login <email>` | Send OTP code |
-| `npx awal@2.12.1 auth verify <otp>` | Complete sign-in |
-| `npx awal@2.12.1 auth logout` | Sign out and clear the session |
-| `npx awal@2.12.1 send <amount> <recipient>` | Send tokens |
-| `npx awal@2.12.1 trade <amount> <from> <to>` | Swap tokens |
-| `npx awal@2.12.1 x402 bazaar search <query>` | Search paid services |
-| `npx awal@2.12.1 x402 bazaar list` | List bazaar resources |
-| `npx awal@2.12.1 x402 details <url>` | Inspect payment requirements |
-| `npx awal@2.12.1 x402 pay <url>` | Pay and call an x402 endpoint |
+Wallet MCP uses a different wallet. Signing in does not migrate the old wallet or its funds.
+If the user needs to recover existing funds, direct them to the existing
+[Agentic Wallet app](https://payments-mcp.coinbase.com) to withdraw during the announced 30-day
+withdrawal window. Do not initiate a transfer without the user's authorization or assume
+Solana sends, funding tools, or headless signing are enabled.
