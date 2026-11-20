@@ -1,14 +1,14 @@
 # Coinbase Agentic Wallet Skills
 
 > **Deprecated:** Agentic Wallet (`awal`) and Payments MCP are being retired in favor of
-> [Coinbase Wallet MCP](https://docs.cdp.coinbase.com/coinbase-for-agents/wallet-mcp/skill.md).
+> [Wallet MCP](https://docs.cdp.coinbase.com/coinbase-for-agents/wallet-mcp/skill.md).
 > For new wallet tasks, start at [coinbase.com/skill.md](https://www.coinbase.com/skill.md)
-> and follow **Coinbase Wallet MCP**, not Coinbase MCP (account trading).
+> and follow **Wallet MCP**, not Coinbase MCP (account trading).
 
-## Use Coinbase Wallet MCP
+## Use Wallet MCP
 
 Fetch and follow the maintained [Coinbase skill](https://www.coinbase.com/skill.md), choosing
-**Coinbase Wallet MCP** for agent-wallet and onchain tasks. It connects to
+**Wallet MCP** for agent-wallet and onchain tasks. It connects to
 `https://wallet-mcp.coinbase.com` using Coinbase Wallet OAuth. Follow the linked
 [Wallet MCP setup guide](https://docs.cdp.coinbase.com/coinbase-for-agents/wallet-mcp/skill.md)
 for your app, required onboarding, supported tools, and payment approvals.
