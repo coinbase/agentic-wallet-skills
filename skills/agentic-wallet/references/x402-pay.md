@@ -1,5 +1,8 @@
 # Making Paid x402 Requests
 
+> **Sunset notice:** Agentic Wallet x402 payments (`x402 pay`) are not operational during the sunset period.
+> These instructions are retained for reference only; do not run them. See the [current migration guidance](../SKILL.md).
+
 Use the `npx awal@2.12.1 x402 pay` command to call paid API endpoints with automatic USDC payment on Base.
 
 If the wallet is not authenticated, see `references/auth.md`.
