@@ -1,5 +1,8 @@
 # Trading Tokens
 
+> **Sunset notice:** Agentic Wallet token trading (`trade`) is not operational during the sunset period.
+> These instructions are retained for reference only; do not run them. See the [current migration guidance](../SKILL.md).
+
 Use the `npx awal@2.12.1 trade` command to swap tokens on Base or Polygon via the CDP Swap API. You must be authenticated to trade.
 
 If the wallet is not authenticated, see `references/auth.md`.

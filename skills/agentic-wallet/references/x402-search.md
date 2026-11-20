@@ -1,5 +1,8 @@
 # Searching the x402 Bazaar
 
+> **Sunset notice:** Agentic Wallet x402 Bazaar search is not operational during the sunset period.
+> These instructions are retained for reference only; do not run them. See the [current migration guidance](../SKILL.md).
+
 Use the `npx awal@2.12.1 x402` commands to discover and inspect paid API endpoints available on the x402 bazaar marketplace. **No authentication or balance is required for searching.**
 
 ## Commands

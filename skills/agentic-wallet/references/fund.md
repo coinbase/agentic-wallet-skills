@@ -1,5 +1,8 @@
 # Funding the Wallet
 
+> **Sunset notice:** Coinbase Onramp through Agentic Wallet is not operational during the sunset period.
+> Do not use the Onramp steps below; see the [current migration guidance](../SKILL.md).
+
 Use the wallet companion app to fund the wallet with USDC via Coinbase Onramp. This supports multiple payment methods including Apple Pay, debit cards, bank transfers, and funding from a Coinbase account.
 
 If the wallet is not authenticated, see `references/auth.md`.

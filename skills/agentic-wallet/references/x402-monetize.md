@@ -1,5 +1,8 @@
 # Build an x402 Payment Server
 
+> **Sunset notice:** Agentic Wallet x402 monetization (`x402 monetize`) is not operational during the sunset period.
+> These instructions are retained for reference only; do not run them. See the [current migration guidance](../SKILL.md).
+
 Create an Express server that charges USDC for API access using the x402 payment protocol. Callers pay per-request in USDC on Base — no accounts, API keys, or subscriptions needed. Your service is automatically discoverable by other agents via the x402 Bazaar.
 
 ## How It Works
