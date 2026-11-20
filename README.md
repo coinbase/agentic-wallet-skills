@@ -1,65 +1,41 @@
 # Coinbase Agentic Wallet Skills
 
-[Agent Skills](https://agentskills.io) for crypto wallet operations. These skills enable AI agents to authenticate, send USDC, trade tokens and more using the [`awal`](https://www.npmjs.com/package/awal) CLI.
+> **Deprecated:** Agentic Wallet (`awal`) and Payments MCP are being retired in favor of
+> [Coinbase Wallet MCP](https://docs.cdp.coinbase.com/coinbase-for-agents/wallet-mcp/skill.md).
+> For new wallet tasks, start at [coinbase.com/skill.md](https://www.coinbase.com/skill.md)
+> and follow **Coinbase Wallet MCP**, not Coinbase MCP (account trading).
 
-## What it does
+## Use Coinbase Wallet MCP
 
-A single skill — [`agentic-wallet`](./skills/agentic-wallet/SKILL.md) — that routes the agent to topic-specific reference docs in [`./skills/agentic-wallet/references/`](./skills/agentic-wallet/references/):
+Fetch and follow the maintained [Coinbase skill](https://www.coinbase.com/skill.md), choosing
+**Coinbase Wallet MCP** for agent-wallet and onchain tasks. It connects to
+`https://wallet-mcp.coinbase.com` using Coinbase Wallet OAuth. Follow the linked
+[Wallet MCP setup guide](https://docs.cdp.coinbase.com/coinbase-for-agents/wallet-mcp/skill.md)
+for your app, required onboarding, supported tools, and payment approvals.
 
-| Capability | Reference |
-| --- | --- |
-| Sign in via email OTP | [`auth.md`](./skills/agentic-wallet/references/auth.md) |
-| Check wallet balances across Base, Polygon, and Solana | [`balance.md`](./skills/agentic-wallet/references/balance.md) |
-| Send USDC / ETH / POL / SOL on Base, Polygon, or Solana | [`send-usdc.md`](./skills/agentic-wallet/references/send-usdc.md) |
-| Swap / trade tokens on Base or Polygon | [`trade.md`](./skills/agentic-wallet/references/trade.md) |
-| Add funds via Coinbase Onramp | [`fund.md`](./skills/agentic-wallet/references/fund.md) |
-| Search the x402 bazaar for paid API services | [`x402-search.md`](./skills/agentic-wallet/references/x402-search.md) |
-| Pay an x402 endpoint with automatic USDC payment | [`x402-pay.md`](./skills/agentic-wallet/references/x402-pay.md) |
-| Build and deploy a paid API server (x402) | [`x402-monetize.md`](./skills/agentic-wallet/references/x402-monetize.md) |
-| Query onchain data on Base via the CDP SQL API | [`query-onchain.md`](./skills/agentic-wallet/references/query-onchain.md) |
+The [`agentic-wallet` skill](./skills/agentic-wallet/SKILL.md) now points agents to that
+maintained entry point instead of installing or running the `awal` CLI. Previously installed
+copies do not update automatically; replace or re-fetch the old skill before using it.
 
-## Installation
+## Existing wallets and funds
 
-Install with [Vercel's Skills CLI](https:/skills.sh):
+Wallet MCP uses a different wallet from the CDP embedded wallet used by Agentic Wallet.
+Signing in to Wallet MCP does **not** move your funds. You must withdraw or transfer them
+yourself, checking the receiving address and network before sending.
 
-```bash
-npx skills add coinbase/agentic-wallet-skills
-```
+Use the existing [Agentic Wallet app](https://payments-mcp.coinbase.com) to withdraw during the
+30-day withdrawal window announced with the sunset. Do not add funds to the retiring wallet.
+Check the current Wallet MCP guide and live tools before transferring assets: receiving an
+asset does not mean that sending it is enabled, particularly on Solana.
 
-## Usage
-
-Skills are automatically available once installed. The agent will use them when relevant tasks are detected.
-
-**Examples:**
-
-```text
-Sign-in to my wallet with me@email.com
-```
-
-```text
-Send 10 USDC to barmstrong.eth
-```
+The old files in [`references/`](./skills/agentic-wallet/references/) are retained for legacy
+reference, not as setup or payment instructions for new tasks. This repository will be
+archived at shutdown.
 
 ## Contributing
 
-To add a new capability:
-
-1. Create a new markdown file in `./skills/agentic-wallet/references/`
-2. Add a row to the routing table in `./skills/agentic-wallet/SKILL.md` describing when the agent should read it
-3. If the capability needs a new shell tool, add it to `allowed-tools` in `SKILL.md` frontmatter
-
-See the [Agent Skills specification](https://agentskills.io/specification) for the complete format.
-
-### Updating the `awal` version
-
-The `awal` CLI version is pinned in every code block in `SKILL.md` and the reference docs. When a new version is published to npm, run:
-
-```bash
-# Make sure you're using Node v22+
-node ./scripts/bump-awal.js
-```
-
-This fetches the latest version from the npm registry and rewrites every `awal@<version>` reference under `./skills/`.
+This repository is deprecated. Direct new wallet setup and usage improvements to the
+maintained Wallet MCP guide linked above rather than adding CLI capabilities here.
 
 ## License
 
